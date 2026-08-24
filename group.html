@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Grup | Ümmetin Işıkları</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    .group-page {
+      min-height: 80vh;
+      padding: 90px 0;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 35px;
+      font-weight: 800;
+      font-size: .85rem;
+    }
+
+    .group-box {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      padding: 50px;
+      box-shadow: var(--shadow);
+    }
+
+    .group-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      background: #e4f5f0;
+      display: grid;
+      place-items: center;
+      font-size: 2rem;
+      margin-bottom: 24px;
+    }
+
+    .group-box h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      margin-bottom: 18px;
+    }
+
+    .group-box > p {
+      max-width: 720px;
+      color: var(--muted);
+    }
+
+    .group-info {
+      display: grid;
+      grid-template-columns:
+        repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .info-card {
+      background: var(--cream-2);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 25px;
+    }
+
+    .info-card h2 {
+      font-size: 1.1rem;
+    }
+
+    .info-card p {
+      color: var(--muted);
+      font-size: .86rem;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 700px) {
+
+      .group-box {
+        padding: 30px;
+      }
+
+      .group-info {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<header class="site-header">
+
+  <div class="container nav">
+
+    <a
+      class="brand"
+      href="index.html"
+    >
+
+      <span class="brand-logo">
+
+        <img
+          src="logo.png"
+          alt="Ümmetin Işıkları"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+        >
+
+        <span class="logo-fallback">
+          Üİ
+        </span>
+
+      </span>
+
+      <span>
+        Ümmetin Işıkları
+      </span>
+
+    </a>
+
+
+    <a
+      href="index.html#groups"
+      class="btn btn-secondary"
+    >
+      ← Gruplar
+    </a>
+
+  </div>
+
+</header>
+
+
+<main class="group-page">
+
+  <div class="container">
+
+    <a
+      href="index.html#groups"
+      class="back-link"
+    >
+      ← Tüm Gruplar
+    </a>
+
+
+    <section class="group-box">
+
+      <div
+        class="group-icon"
+        id="groupIcon"
+      >
+        🤝
+      </div>
+
+
+      <span class="section-kicker">
+        GRUP
+      </span>
+
+
+      <h1 id="groupTitle">
+        Yardımlaşma
+      </h1>
+
+
+      <p id="groupDescription">
+        Bu grubun gerçek amacı,
+        görevleri ve yaptığı çalışmalar
+        daha sonra burada açıklanacak.
+      </p>
+
+
+      <div class="group-info">
+
+
+        <article class="info-card">
+
+          <h2>
+            🎯 Görevimiz
+          </h2>
+
+          <p>
+            Gerçek grup bilgileri hazır olduğunda
+            burada yer alacak.
+          </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+          <h2>
+            📋 Çalışmalarımız
+          </h2>
+
+          <p>
+            Grubun yaptığı çalışmalar
+            burada gösterilecek.
+          </p>
+
+        </article>
+
+
+        <article class="info-card">
+
+          <h2>
+            📅 Etkinlikler
+          </h2>
+
+          <p>
+            Bu grupla ilgili etkinlikler
+            burada listelenecek.
+          </p>
+
+        </article>
+
+
+      </div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<script>
+
+const groups = {
+
+  yardimlasma: {
+
+    title: "Yardımlaşma",
+
+    icon: "🤝",
+
+    description:
+      "Yardımlaşma grubunun gerçek amacı ve yaptığı çalışmalar daha sonra burada açıklanacak."
+
+  },
+
+  group2: {
+
+    title: "Yeni Grup",
+
+    icon: "＋",
+
+    description:
+      "Bu grup hakkında gerçek bilgiler daha sonra eklenecek."
+
+  },
+
+  group3: {
+
+    title: "Yeni Grup",
+
+    icon: "✦",
+
+    description:
+      "Bu grup hakkında gerçek bilgiler daha sonra eklenecek."
+
+  }
+
+};
+
+
+const params =
+  new URLSearchParams(
+    window.location.search
+  );
+
+
+const groupName =
+  params.get("group") || "yardimlasma";
+
+
+const group =
+  groups[groupName] ||
+  groups.yardimlasma;
+
+
+document.title =
+  group.title +
+  " | Ümmetin Işıkları";
+
+
+document.getElementById(
+  "groupTitle"
+).textContent =
+  group.title;
+
+
+document.getElementById(
+  "groupIcon"
+).textContent =
+  group.icon;
+
+
+document.getElementById(
+  "groupDescription"
+).textContent =
+  group.description;
+
+</script>
+
+
+</body>
+
+</html>

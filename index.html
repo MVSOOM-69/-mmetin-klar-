@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Ümmetin Işıkları — Birlik, İman, İlim.">
+  <title>Ümmetin Işıkları</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Floating personality elements -->
+  <div class="floating-layer" aria-hidden="true">
+    <span class="float float-1">✦</span>
+    <span class="float float-2">🕌</span>
+    <span class="float float-3">✧</span>
+    <span class="float float-4">🌙</span>
+    <span class="float float-5">●</span>
+  </div>
+
+
+  <!-- IMPORTANT ANNOUNCEMENT -->
+  <div class="top-alert" id="topAlert">
+    <div class="container alert-inner">
+
+      <strong>⚠️ ÖNEMLİ DUYURU</strong>
+
+      <span>
+        Yakında burada önemli duyurular yer alacak.
+      </span>
+
+      <a href="#announcements">
+        Detayları Gör →
+      </a>
+
+      <button id="closeAlert" aria-label="Duyuruyu kapat">
+        ×
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- HEADER -->
+  <header class="site-header">
+
+    <div class="container nav">
+
+      <a href="#home" class="brand">
+
+        <span class="brand-logo">
+
+          <img
+            src="logo.png"
+            alt="Ümmetin Işıkları"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+          >
+
+          <span class="logo-fallback">
+            Üİ
+          </span>
+
+        </span>
+
+        <span>
+          Ümmetin Işıkları
+        </span>
+
+      </a>
+
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Menüyü aç"
+      >
+        ☰
+      </button>
+
+
+      <nav id="mainNav">
+
+        <a href="#home">Ana Sayfa</a>
+        <a href="#announcements">Duyurular</a>
+        <a href="#groups">Gruplar</a>
+        <a href="#events">Etkinlikler</a>
+        <a href="#management">Yönetim</a>
+        <a href="#about">Hakkımızda</a>
+
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <main>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+
+      <div class="container hero-grid">
+
+        <div class="hero-content reveal">
+
+          <div class="eyebrow">
+            <span></span>
+            Bir topluluk. Birlikte büyüyen bir ışık.
+          </div>
+
+          <h1>
+            Ümmetin
+            <br>
+            <em>Işıkları</em>
+          </h1>
+
+          <div class="motto">
+            Birlik • İman • İlim
+          </div>
+
+          <p class="hero-text">
+            Duyuruları, grupları, etkinlikleri ve topluluk çalışmalarını
+            tek bir yerde keşfet.
+          </p>
+
+          <div class="hero-actions">
+
+            <a href="#announcements" class="btn btn-primary">
+              Duyuruları Gör →
+            </a>
+
+            <a href="#groups" class="btn btn-secondary">
+              Gruplarımız
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- HERO LOGO -->
+        <div class="hero-art reveal">
+
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+
+          <div class="hero-logo-card">
+
+            <span class="hero-spark spark-one">✦</span>
+            <span class="hero-spark spark-two">✧</span>
+
+            <div class="hero-logo">
+
+              <img
+                src="logo.png"
+                alt=""
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+              >
+
+              <span class="logo-fallback logo-large">
+                Üİ
+              </span>
+
+            </div>
+
+            <small>
+              ÜMMETİN IŞIKLARI
+            </small>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+    <section class="stats">
+
+      <div class="container stats-grid">
+
+        <div class="stat">
+          <strong>—</strong>
+          <span>Aktif Grup</span>
+        </div>
+
+        <div class="stat">
+          <strong>—</strong>
+          <span>Üye</span>
+        </div>
+
+        <div class="stat">
+          <strong>—</strong>
+          <span>Etkinlik</span>
+        </div>
+
+        <div class="stat">
+          <strong>—</strong>
+          <span>Proje</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ANNOUNCEMENTS -->
+    <section class="section" id="announcements">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+            <span class="section-kicker">
+              GÜNCEL
+            </span>
+
+            <h2>
+              Duyurular
+            </h2>
+          </div>
+
+          <a href="#" class="text-link">
+            Tüm duyurular →
+          </a>
+
+        </div>
+
+
+        <article class="featured-announcement reveal">
+
+          <div class="announcement-icon">
+            📢
+          </div>
+
+          <div>
+
+            <div class="announcement-meta">
+
+              <span class="tag">
+                DUYURU
+              </span>
+
+              <span>
+                Henüz yayınlanmadı
+              </span>
+
+            </div>
+
+            <h3>
+              İlk duyurular burada görünecek.
+            </h3>
+
+            <p>
+              Gerçek duyurular eklendiğinde bu alan güncellenecek.
+            </p>
+
+          </div>
+
+          <span class="announcement-arrow">
+            →
+          </span>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- GROUPS -->
+    <section class="section cream-section" id="groups">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="section-kicker">
+              TOPLULUK
+            </span>
+
+            <h2>
+              Gruplarımız
+            </h2>
+
+          </div>
+
+          <a href="#groups" class="text-link">
+            Tüm gruplar →
+          </a>
+
+        </div>
+
+
+        <p class="section-intro">
+
+          Her grubun kendi sayfası olacak.
+          Bir gruba tıkladığında o grubun ne yaptığını,
+          görevlerini ve çalışmalarını ayrıntılı olarak görebileceksin.
+
+        </p>
+
+
+        <div class="cards-grid">
+
+
+          <!-- GROUP 1 -->
+          <article class="group-card reveal">
+
+            <div class="card-icon green">
+              🤝
+            </div>
+
+            <span class="card-number">
+              01
+            </span>
+
+            <h3>
+              Yardımlaşma
+            </h3>
+
+            <p>
+              Grubun gerçek görev ve çalışmalarına dair bilgiler
+              daha sonra burada yer alacak.
+            </p>
+
+            <a
+              href="group.html?group=yardimlasma"
+              class="card-link"
+            >
+              Gruba Git →
+            </a>
+
+          </article>
+
+
+          <!-- GROUP 2 -->
+          <article class="group-card reveal">
+
+            <div class="card-icon gold">
+              ＋
+            </div>
+
+            <span class="card-number">
+              02
+            </span>
+
+            <h3>
+              Yeni Grup
+            </h3>
+
+            <p>
+              Gerçek grup bilgileri eklendiğinde
+              bu kart güncellenecek.
+            </p>
+
+            <a
+              href="group.html?group=group2"
+              class="card-link"
+            >
+              Gruba Git →
+            </a>
+
+          </article>
+
+
+          <!-- GROUP 3 -->
+          <article class="group-card reveal">
+
+            <div class="card-icon orange">
+              ✦
+            </div>
+
+            <span class="card-number">
+              03
+            </span>
+
+            <h3>
+              Yeni Grup
+            </h3>
+
+            <p>
+              Yeni gruplar aynı sistem üzerinden
+              kolayca eklenebilir.
+            </p>
+
+            <a
+              href="group.html?group=group3"
+              class="card-link"
+            >
+              Gruba Git →
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- EVENTS -->
+    <section class="section" id="events">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="section-kicker">
+              TAKVİM
+            </span>
+
+            <h2>
+              Yaklaşan Etkinlikler
+            </h2>
+
+          </div>
+
+        </div>
+
+
+        <div class="empty-panel reveal">
+
+          <div class="empty-icon">
+            📅
+          </div>
+
+          <div>
+
+            <h3>
+              Yakında burada etkinlikler olacak.
+            </h3>
+
+            <p>
+              Tarih, açıklama, konum ve diğer bilgiler
+              daha sonra eklenebilir.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- MANAGEMENT -->
+    <section class="section cream-section" id="management">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="section-kicker">
+              EKİP
+            </span>
+
+            <h2>
+              Yönetim
+            </h2>
+
+          </div>
+
+          <span class="future-note">
+            Bilgiler daha sonra eklenecek
+          </span>
+
+        </div>
+
+
+        <div class="management-grid">
+
+
+          <article class="person-card reveal">
+
+            <div class="avatar">
+              Üİ
+            </div>
+
+            <span>
+              YÖNETİM
+            </span>
+
+            <h3>
+              Yönetici Profili
+            </h3>
+
+            <p>
+              İsim ve görev bilgileri daha sonra eklenecek.
+            </p>
+
+          </article>
+
+
+          <article class="person-card reveal">
+
+            <div class="avatar">
+              Üİ
+            </div>
+
+            <span>
+              YÖNETİM
+            </span>
+
+            <h3>
+              Yönetici Profili
+            </h3>
+
+            <p>
+              İsim ve görev bilgileri daha sonra eklenecek.
+            </p>
+
+          </article>
+
+
+          <article class="person-card reveal">
+
+            <div class="avatar">
+              Üİ
+            </div>
+
+            <span>
+              YÖNETİM
+            </span>
+
+            <h3>
+              Yönetici Profili
+            </h3>
+
+            <p>
+              İsim ve görev bilgileri daha sonra eklenecek.
+            </p>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- OUR LANGUAGE -->
+    <section class="section" id="language">
+
+      <div class="container language-layout">
+
+        <div class="reveal">
+
+          <span class="section-kicker">
+            TOPLULUK KÜLTÜRÜ
+          </span>
+
+          <h2>
+            🗣️ Bizim Dilimiz
+          </h2>
+
+          <p class="section-intro">
+            Topluluk içinde kullanılan özel ifadeler,
+            terimler ve anlamları burada yaşayacak.
+          </p>
+
+          <a href="#" class="btn btn-secondary">
+            Sözlüğe Git →
+          </a>
+
+        </div>
+
+
+        <div class="quote-card reveal">
+
+          <span class="quote-mark">
+            “
+          </span>
+
+          <p>
+            Bizim topluluğumuzu özel yapan küçük şeyler burada birikir.
+          </p>
+
+          <small>
+            Topluluk Sözlüğü
+          </small>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- GALLERY -->
+    <section class="section cream-section" id="gallery">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+
+            <span class="section-kicker">
+              HATIRALAR
+            </span>
+
+            <h2>
+              Galeri
+            </h2>
+
+          </div>
+
+          <a href="#" class="text-link">
+            Galeriyi Gör →
+          </a>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+          <div>🖼️</div>
+          <div>✦</div>
+          <div>📷</div>
+          <div>🕌</div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+
+      <div class="container about-layout">
+
+        <div class="about-mark reveal">
+          Üİ
+        </div>
+
+        <div class="reveal">
+
+          <span class="section-kicker">
+            BİZ KİMİZ?
+          </span>
+
+          <h2>
+            Ümmetin Işıkları
+          </h2>
+
+          <p>
+            Bu alan Ümmetin Işıkları'nın amacı, değerleri,
+            çalışma şekli ve topluluk hakkında gerçek bilgiler
+            hazır olduğunda doldurulacak.
+          </p>
+
+          <p class="muted">
+            Şimdilik altyapıyı kuruyoruz.
+            İçerikleri daha sonra ekleyeceğiz.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- FOOTER -->
+  <footer id="contact">
+
+    <div class="container footer-grid">
+
+      <div>
+
+        <div class="brand footer-brand">
+
+          <span class="brand-logo">
+            <span class="logo-fallback">
+              Üİ
+            </span>
+          </span>
+
+          <span>
+            Ümmetin Işıkları
+          </span>
+
+        </div>
+
+        <p>
+          Birlik • İman • İlim
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Keşfet
+        </h4>
+
+        <a href="#announcements">
+          Duyurular
+        </a>
+
+        <a href="#groups">
+          Gruplar
+        </a>
+
+        <a href="#events">
+          Etkinlikler
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          Topluluk
+        </h4>
+
+        <a href="#management">
+          Yönetim
+        </a>
+
+        <a href="#language">
+          Bizim Dilimiz
+        </a>
+
+        <a href="#gallery">
+          Galeri
+        </a>
+
+      </div>
+
+
+      <div>
+
+        <h4>
+          İletişim
+        </h4>
+
+        <a href="#contact">
+          Bilgiler yakında
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="container footer-bottom">
+
+      <span>
+        © 2026 Ümmetin Işıkları
+      </span>
+
+      <span>
+        Birlik • İman • İlim
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
