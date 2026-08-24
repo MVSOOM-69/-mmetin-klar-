@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Yönetim | Ümmetin Işıkları
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <span class="brand-logo">
+
+                <img
+                    src="images/logo.png"
+                    alt="Logo"
+                >
+
+                <span class="logo-fallback">
+                    Üİ
+                </span>
+
+            </span>
+
+
+            <span>
+                Ümmetin Işıkları
+            </span>
+
+        </a>
+
+
+        <a
+            class="button secondary"
+            href="index.html#management"
+        >
+            ← Ana Sayfa
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="section">
+
+    <div class="container">
+
+        <label>
+            EKİP
+        </label>
+
+
+        <h1
+            style="
+                font-size:clamp(3rem,8vw,6rem);
+                margin:10px 0 20px;
+            "
+        >
+            Yönetim
+        </h1>
+
+
+        <p class="section-description">
+
+            Yönetim kadrosunun fotoğrafları,
+            isimleri, görevleri ve sorumlulukları
+            hazır olduğunda burada gösterilecek.
+
+        </p>
+
+
+        <div
+            class="management-grid"
+            id="managementPage"
+        ></div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+const management = [
+
+    {
+        name: "Yönetici Profili",
+        role: "YÖNETİM",
+        image: "",
+        duties:
+            "İsim, fotoğraf ve görev bilgileri daha sonra eklenecek."
+    },
+
+
+    {
+        name: "Yönetici Profili",
+        role: "YÖNETİM",
+        image: "",
+        duties:
+            "İsim, fotoğraf ve görev bilgileri daha sonra eklenecek."
+    },
+
+
+    {
+        name: "Yönetici Profili",
+        role: "YÖNETİM",
+        image: "",
+        duties:
+            "İsim, fotoğraf ve görev bilgileri daha sonra eklenecek."
+    }
+
+];
+
+
+document.getElementById(
+    "managementPage"
+).innerHTML =
+
+management.map(person => `
+
+    <article class="person-card">
+
+        <div class="avatar">
+
+            ${
+                person.image
+
+                ?
+
+                `<img
+                    src="${person.image}"
+                    alt="${person.name}"
+                >`
+
+                :
+
+                "Üİ"
+            }
+
+        </div>
+
+
+        <small>
+            ${person.role}
+        </small>
+
+
+        <h3>
+            ${person.name}
+        </h3>
+
+
+        <p>
+            ${person.duties}
+        </p>
+
+    </article>
+
+`).join("");
+
+</script>
+
+
+</body>
+
+</html>

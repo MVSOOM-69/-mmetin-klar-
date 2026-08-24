@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Grup | Ümmetin Işıkları
+    </title>
+
+    <link rel="stylesheet" href="style.css">
+
+
+    <style>
+
+        .group-page {
+            padding: 80px 0;
+            min-height: 80vh;
+        }
+
+
+        .group-box {
+            background: white;
+
+            border:
+                1px solid
+                var(--line);
+
+            border-radius: 30px;
+
+            padding: 45px;
+
+            box-shadow:
+                var(--shadow);
+        }
+
+
+        .back-link {
+            display: inline-block;
+
+            margin-bottom: 25px;
+
+            font-weight: 850;
+        }
+
+
+        .group-page-icon {
+            width: 70px;
+            height: 70px;
+
+            border-radius: 20px;
+
+            background: #e3f4ef;
+
+            display: grid;
+
+            place-items: center;
+
+            font-size: 2rem;
+
+            margin-bottom: 22px;
+        }
+
+
+        .group-box h1 {
+            font-size:
+                clamp(
+                    3rem,
+                    8vw,
+                    6rem
+                );
+
+            margin:
+                8px
+                0
+                18px;
+        }
+
+
+        .group-description {
+            max-width: 750px;
+
+            color:
+                var(--muted);
+        }
+
+
+        .group-info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 18px;
+
+            margin-top: 35px;
+        }
+
+
+        .group-info {
+            background:
+                var(--cream);
+
+            border:
+                1px solid
+                var(--line);
+
+            border-radius: 21px;
+
+            padding: 24px;
+        }
+
+
+        .group-info p {
+            color:
+                var(--muted);
+
+            font-size: .84rem;
+
+            margin-top: 7px;
+        }
+
+
+        .team-section {
+            margin-top: 60px;
+        }
+
+
+        .team-section h2 {
+            font-size: 2.5rem;
+
+            margin-top: 7px;
+        }
+
+
+        .team-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 18px;
+
+            margin-top: 30px;
+        }
+
+
+        .team-card {
+            background:
+                var(--cream);
+
+            border:
+                1px solid
+                var(--line);
+
+            border-radius: 21px;
+
+            padding: 24px;
+
+            text-align: center;
+        }
+
+
+        .team-photo {
+            width: 88px;
+            height: 88px;
+
+            border-radius: 50%;
+
+            margin:
+                0
+                auto
+                14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--green),
+                    var(--gold)
+                );
+
+            color: white;
+
+            display: grid;
+
+            place-items: center;
+
+            font-weight: 900;
+
+            overflow: hidden;
+        }
+
+
+        .team-photo img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+        }
+
+
+        .team-card small {
+            color:
+                var(--green);
+
+            font-weight: 900;
+
+            font-size: .65rem;
+
+            letter-spacing: .1em;
+        }
+
+
+        .team-card p {
+            color:
+                var(--muted);
+
+            font-size: .84rem;
+
+            margin-top: 7px;
+        }
+
+
+        @media(max-width:700px) {
+
+            .group-box {
+                padding: 28px;
+            }
+
+            .group-info-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a
+            class="brand"
+            href="index.html"
+        >
+
+            <span class="brand-logo">
+
+                <img
+                    src="images/logo.png"
+                    alt="Logo"
+                >
+
+                <span class="logo-fallback">
+                    Üİ
+                </span>
+
+            </span>
+
+
+            <span>
+                Ümmetin Işıkları
+            </span>
+
+        </a>
+
+
+        <a
+            class="button secondary"
+            href="index.html#groups"
+        >
+            ← Gruplar
+        </a>
+
+    </div>
+
+</header>
+
+
+<main class="group-page">
+
+    <div class="container">
+
+
+        <a
+            href="index.html#groups"
+            class="back-link"
+        >
+            ← Tüm Gruplar
+        </a>
+
+
+        <section class="group-box">
+
+
+            <div
+                class="group-page-icon"
+                id="groupIcon"
+            >
+                🤝
+            </div>
+
+
+            <label>
+                GRUP
+            </label>
+
+
+            <h1 id="groupTitle">
+                Yardımlaşma
+            </h1>
+
+
+            <p
+                class="group-description"
+                id="groupDescription"
+            ></p>
+
+
+            <div class="group-info-grid">
+
+
+                <article class="group-info">
+
+                    <h3>
+                        🎯 Görevimiz
+                    </h3>
+
+                    <p id="mission"></p>
+
+                </article>
+
+
+                <article class="group-info">
+
+                    <h3>
+                        📋 Çalışmalarımız
+                    </h3>
+
+                    <p id="work"></p>
+
+                </article>
+
+
+                <article class="group-info">
+
+                    <h3>
+                        📅 Etkinlikler
+                    </h3>
+
+                    <p id="events"></p>
+
+                </article>
+
+
+            </div>
+
+
+            <!-- ORGANISATION TEAM -->
+
+            <section class="team-section">
+
+                <label>
+                    ORGANISATION TEAM
+                </label>
+
+
+                <h2>
+                    Organisation Team
+                </h2>
+
+
+                <p class="section-description">
+
+                    Bu grubun çalışanlarının isimleri,
+                    fotoğrafları ve görevleri burada
+                    gösterilecek.
+
+                </p>
+
+
+                <div
+                    class="team-grid"
+                    id="teamGrid"
+                ></div>
+
+            </section>
+
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<script src="group.js"></script>
+
+</body>
+
+</html>
