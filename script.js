@@ -116,7 +116,7 @@ if (groupsGrid) {
 
 
 /* =========================================
-   SUPABASE SETTINGS
+   SUPABASE
 ========================================= */
 
 const SUPABASE_URL =
@@ -141,37 +141,7 @@ async function loadManagement() {
         return;
     }
 
-
-    managementGrid.innerHTML = `
-
-        <article class="person-card reveal">
-
-            <div class="avatar">
-                ...
-            </div>
-
-            <small>
-                YÖNETİM
-            </small>
-
-            <h3>
-                Loading...
-            </h3>
-
-            <p>
-                Management profiles are loading...
-            </p>
-
-        </article>
-
-    `;
-
-
     try {
-
-        /*
-           Direct Supabase REST request.
-        */
 
         const response =
             await fetch(
@@ -181,8 +151,7 @@ async function loadManagement() {
                     method: "GET",
 
                     headers: {
-                        "apikey":
-                            SUPABASE_KEY,
+                        "apikey": SUPABASE_KEY,
 
                         "Authorization":
                             "Bearer " +
@@ -213,16 +182,6 @@ async function loadManagement() {
         const data =
             await response.json();
 
-
-        console.log(
-            "Management data:",
-            data
-        );
-
-
-        /*
-           No management members.
-        */
 
         if (
             !Array.isArray(data) ||
@@ -256,10 +215,6 @@ async function loadManagement() {
             return;
         }
 
-
-        /*
-           Create management cards.
-        */
 
         managementGrid.innerHTML =
             data.map(
@@ -325,11 +280,6 @@ async function loadManagement() {
             ).join("");
 
 
-        /*
-           Activate scroll animation
-           for management cards.
-        */
-
         managementGrid
             .querySelectorAll(".reveal")
             .forEach(
@@ -342,7 +292,6 @@ async function loadManagement() {
                 }
             );
 
-
     }
 
     catch (error) {
@@ -351,7 +300,6 @@ async function loadManagement() {
             "MANAGEMENT ERROR:",
             error
         );
-
 
         managementGrid.innerHTML = `
 
@@ -418,14 +366,15 @@ const navigation =
     );
 
 
-if (
-    menuButton &&
-    navigation
-) {
+if (menuButton && navigation) {
 
     menuButton.addEventListener(
         "click",
-        function () {
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
 
             navigation.classList.toggle(
                 "open"
@@ -453,6 +402,31 @@ if (
 
             }
         );
+
+
+    /*
+       Close the menu when tapping
+       outside of it.
+    */
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                navigation.classList.contains("open") &&
+                !navigation.contains(event.target) &&
+                !menuButton.contains(event.target)
+            ) {
+
+                navigation.classList.remove(
+                    "open"
+                );
+
+            }
+
+        }
+    );
 
 }
 
@@ -509,7 +483,7 @@ document
 
 
 /* =========================================
-   START MANAGEMENT
+   START
 ========================================= */
 
 loadManagement();
