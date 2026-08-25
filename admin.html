@@ -19,8 +19,8 @@
 body {
     background: #fffdf8;
     color: #202020;
-    font-family: Inter, system-ui, -apple-system,
-        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
+        "Segoe UI", sans-serif;
     line-height: 1.6;
 }
 
@@ -30,11 +30,11 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 30px;
-    background: rgba(255,253,248,.96);
+    background: rgba(255,253,248,.97);
     border-bottom: 1px solid #e5dfd3;
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 100;
 }
 
 .brand {
@@ -73,7 +73,7 @@ header {
 }
 
 main {
-    width: min(1100px, calc(100% - 30px));
+    width: min(1150px, calc(100% - 30px));
     margin: auto;
     padding: 55px 0 80px;
 }
@@ -98,7 +98,7 @@ main {
 
 .grid {
     display: grid;
-    grid-template-columns: .8fr 1.2fr;
+    grid-template-columns: .85fr 1.15fr;
     gap: 25px;
     margin-top: 35px;
 }
@@ -109,6 +109,10 @@ main {
     border-radius: 24px;
     padding: 28px;
     box-shadow: 0 20px 60px rgba(0,0,0,.07);
+}
+
+.panel + .panel {
+    margin-bottom: 25px;
 }
 
 .panel h2 {
@@ -143,6 +147,10 @@ select {
     color: #202020;
     font: inherit;
     outline: none;
+}
+
+select {
+    cursor: pointer;
 }
 
 textarea {
@@ -214,6 +222,7 @@ button {
     font-size: .8rem;
     font-weight: 700;
     display: none;
+    word-break: break-word;
 }
 
 .status.show {
@@ -230,10 +239,14 @@ button {
     color: #a23826;
 }
 
+.info-status {
+    background: #eef4f3;
+    color: #35615a;
+}
+
 .member-list {
     display: grid;
     gap: 12px;
-    margin-top: 18px;
 }
 
 .member {
@@ -288,6 +301,14 @@ button {
     margin-top: 3px;
 }
 
+.id-text {
+    display: block;
+    color: #999;
+    font-size: .66rem;
+    margin-top: 3px;
+    font-family: monospace;
+}
+
 .delete {
     flex-shrink: 0;
     border: 1px solid #ead1cb;
@@ -300,6 +321,21 @@ button {
     cursor: pointer;
 }
 
+.delete:hover {
+    background: #fff0ed;
+}
+
+.group-tag {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 3px 7px;
+    border-radius: 7px;
+    background: #e6f6f2;
+    color: #056b5a;
+    font-size: .62rem;
+    font-weight: 900;
+}
+
 .empty {
     text-align: center;
     padding: 30px 15px;
@@ -307,6 +343,23 @@ button {
     border: 1px dashed #d2c8b7;
     border-radius: 17px;
     font-size: .84rem;
+}
+
+.error-box {
+    text-align: left;
+    padding: 18px;
+    color: #a23826;
+    background: #fff0ed;
+    border: 1px solid #ead1cb;
+    border-radius: 17px;
+    font-size: .78rem;
+    word-break: break-word;
+}
+
+.divider {
+    height: 1px;
+    background: #e5dfd3;
+    margin: 25px 0;
 }
 
 @media(max-width:750px) {
@@ -329,6 +382,14 @@ button {
 
     .panel {
         padding: 22px;
+    }
+
+    .member {
+        align-items: flex-start;
+    }
+
+    .delete {
+        margin-left: auto;
     }
 
 }
@@ -361,10 +422,7 @@ button {
 </a>
 
 
-<a
-    href="index.html"
-    class="back"
->
+<a href="index.html" class="back">
     ← Back to website
 </a>
 
@@ -391,492 +449,843 @@ button {
 </div>
 
 
-<!-- ==================================================
-     GROUP MEMBER
-================================================== -->
+<div
+    id="globalStatus"
+    class="status"
+>
+</div>
+
 
 <div class="grid">
 
 
-<section class="panel">
+<!-- =================================================
+     LEFT SIDE
+================================================= -->
 
-<h2>
-    Add Group Member
-</h2>
-
-<p class="panel-description">
-    Add a member to a specific organisation group.
-</p>
+<div>
 
 
-<div
-    id="status"
-    class="status"
-></div>
-
-
-<form id="groupForm">
-
-
-<div class="field">
-
-<label>
-    Group
-</label>
-
-<select
-    id="group"
-    required
->
-
-<option value="">
-    Select a group
-</option>
-
-<option value="yardimlasma">
-    🤝 Yardımlaşma
-</option>
-
-<option value="din">
-    ☪️ Din
-</option>
-
-<option value="kultur">
-    🕌 Kültür
-</option>
-
-<option value="spor">
-    ⚽ Spor
-</option>
-
-<option value="it">
-    🖥️ İT
-</option>
-
-<option value="finans">
-    📊 Finans
-</option>
-
-</select>
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Name
-</label>
-
-<input
-    id="groupName"
-    type="text"
-    placeholder="e.g. Ronaldo Bhai"
-    required
->
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Position / Job Title
-</label>
-
-<input
-    id="groupRole"
-    type="text"
-    placeholder="e.g. Captain"
-    required
->
-
-</div>
-
-
-<div class="field">
-
-<label>
-    Duties
-</label>
-
-<textarea
-    id="groupDuties"
-    placeholder="What does this person do?"
-></textarea>
-
-</div>
-
-
-<!-- PHOTO UPLOAD -->
-
-<div class="field">
-
-<label>
-    Profile Photo
-</label>
-
-<div class="photo-box">
-
-<div
-    id="groupPreview"
-    class="preview"
->
-    Photo
-</div>
-
-<input
-    id="groupPhoto"
-    type="file"
-    accept="image/*"
->
-
-</div>
-
-</div>
-
-
-<button
-    id="groupSave"
-    class="save"
-    type="submit"
->
-    + Add Group Member
-</button>
-
-
-</form>
-
-</section>
-
-
-<!-- ==================================================
-     CURRENT GROUP MEMBERS
-================================================== -->
+<!-- MANAGEMENT -->
 
 <section class="panel">
 
-<h2>
-    Current Group Members
-</h2>
+    <h2>
+        Add Management Member
+    </h2>
 
-<p class="panel-description">
-    Select a group to see its members.
-</p>
-
-
-<select id="viewGroup">
-
-<option value="">
-    Select a group to view
-</option>
-
-<option value="yardimlasma">
-    🤝 Yardımlaşma
-</option>
-
-<option value="din">
-    ☪️ Din
-</option>
-
-<option value="kultur">
-    🕌 Kültür
-</option>
-
-<option value="spor">
-    ⚽ Spor
-</option>
-
-<option value="it">
-    🖥️ İT
-</option>
-
-<option value="finans">
-    📊 Finans
-</option>
-
-</select>
+    <p class="panel-description">
+        Add a person's name, position, description and photo.
+    </p>
 
 
-<div
-    id="groupMembers"
-    class="member-list"
->
+    <form id="managementForm">
 
-<div class="empty">
-    Select a group to see its members.
-</div>
 
-</div>
+        <div class="field">
+
+            <label>
+                Name
+            </label>
+
+            <input
+                id="managementName"
+                type="text"
+                placeholder="e.g. Ronaldo Bhai"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Position / Job Title
+            </label>
+
+            <input
+                id="managementRole"
+                type="text"
+                placeholder="e.g. Head"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Description
+            </label>
+
+            <textarea
+                id="managementDescription"
+                placeholder="Short description..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Profile Photo
+            </label>
+
+            <div class="photo-box">
+
+                <div
+                    id="managementPreview"
+                    class="preview"
+                >
+                    Photo
+                </div>
+
+                <input
+                    id="managementPhoto"
+                    type="file"
+                    accept="image/*"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="managementSave"
+            class="save"
+            type="submit"
+        >
+            + Add Management Member
+        </button>
+
+
+    </form>
 
 </section>
 
-</div>
+
+<div class="divider"></div>
 
 
-<!-- ==================================================
-     MANAGEMENT
-================================================== -->
+<!-- GROUP MEMBER -->
 
-<section
-    class="panel"
-    style="margin-top:25px;"
->
+<section class="panel">
 
-<h2>
-    Management Profiles
-</h2>
+    <h2>
+        Add Group Member
+    </h2>
 
-<p class="panel-description">
-    Members currently added to the management section.
-</p>
+    <p class="panel-description">
+        Add a member to a specific organisation group.
+    </p>
 
 
-<div
-    id="managementMembers"
-    class="member-list"
->
+    <form id="groupForm">
 
-<div class="empty">
-    Loading profiles...
-</div>
 
-</div>
+        <div class="field">
+
+            <label>
+                Group
+            </label>
+
+            <select
+                id="groupSelect"
+                required
+            >
+
+                <option value="">
+                    Select a group
+                </option>
+
+                <option value="yardimlasma">
+                    🤝 Yardımlaşma
+                </option>
+
+                <option value="din">
+                    ☪️ Din
+                </option>
+
+                <option value="kultur">
+                    🕌 Kültür
+                </option>
+
+                <option value="spor">
+                    ⚽ Spor
+                </option>
+
+                <option value="it">
+                    🖥️ İT
+                </option>
+
+                <option value="finans">
+                    📊 Finans
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Name
+            </label>
+
+            <input
+                id="groupName"
+                type="text"
+                placeholder="e.g. Ronaldo Bhai"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Position / Job Title
+            </label>
+
+            <input
+                id="groupRole"
+                type="text"
+                placeholder="e.g. Captain"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Duties
+            </label>
+
+            <textarea
+                id="groupDuties"
+                placeholder="What does this person do?"
+            ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>
+                Profile Photo
+            </label>
+
+            <div class="photo-box">
+
+                <div
+                    id="groupPreview"
+                    class="preview"
+                >
+                    Photo
+                </div>
+
+                <input
+                    id="groupPhoto"
+                    type="file"
+                    accept="image/*"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="groupSave"
+            class="save"
+            type="submit"
+        >
+            + Add Group Member
+        </button>
+
+
+    </form>
 
 </section>
 
+
+</div>
+
+
+<!-- =================================================
+     RIGHT SIDE
+================================================= -->
+
+<div>
+
+
+<!-- CURRENT GROUP MEMBERS -->
+
+<section class="panel">
+
+    <h2>
+        Current Group Members
+    </h2>
+
+    <p class="panel-description">
+        Select a group to see its members.
+    </p>
+
+
+    <div class="field">
+
+        <label>
+            View Group
+        </label>
+
+        <select id="viewGroup">
+
+            <option value="">
+                Select a group to view
+            </option>
+
+            <option value="yardimlasma">
+                🤝 Yardımlaşma
+            </option>
+
+            <option value="din">
+                ☪️ Din
+            </option>
+
+            <option value="kultur">
+                🕌 Kültür
+            </option>
+
+            <option value="spor">
+                ⚽ Spor
+            </option>
+
+            <option value="it">
+                🖥️ İT
+            </option>
+
+            <option value="finans">
+                📊 Finans
+            </option>
+
+        </select>
+
+    </div>
+
+
+    <div
+        id="groupMembers"
+        class="member-list"
+    >
+
+        <div class="empty">
+            Select a group to see its members.
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- MANAGEMENT PROFILES -->
+
+<section class="panel">
+
+    <h2>
+        Management Profiles
+    </h2>
+
+    <p class="panel-description">
+        Members currently added to the management section.
+    </p>
+
+
+    <div
+        id="managementMembers"
+        class="member-list"
+    >
+
+        <div class="empty">
+            Loading profiles...
+        </div>
+
+    </div>
+
+</section>
+
+
+</div>
+
+
+</div>
 
 </main>
 
 
-<script type="module">
-
-import {
-    createClient
-}
-from
-"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+<script>
 
 
-/* ==================================================
+/* =================================================
    SUPABASE
-================================================== */
+================================================= */
 
 const SUPABASE_URL =
     "https://dufqdjvjszewhhakjibb.supabase.co";
 
 const SUPABASE_KEY =
-    "sb_publishable_zdE8Z15zobFjWJ0P86B5Qg_55sAbHer";
+    "sb_publishable_zdE8Z15zobFJW0P86B5Qg_55sAbHer";
+
+const STORAGE_BUCKET =
+    "management-photos";
 
 
-const supabase =
-    createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
+/* =================================================
+   GROUP INFORMATION
+================================================= */
+
+const GROUPS = {
+
+    yardimlasma: {
+        name: "Yardımlaşma",
+        icon: "🤝"
+    },
+
+    din: {
+        name: "Din",
+        icon: "☪️"
+    },
+
+    kultur: {
+        name: "Kültür",
+        icon: "🕌"
+    },
+
+    spor: {
+        name: "Spor",
+        icon: "⚽"
+    },
+
+    it: {
+        name: "İT",
+        icon: "🖥️"
+    },
+
+    finans: {
+        name: "Finans",
+        icon: "📊"
+    }
+
+};
 
 
-/* ==================================================
+/* =================================================
    ELEMENTS
-================================================== */
+================================================= */
 
-const statusBox =
-    document.getElementById(
-        "status"
-    );
+const globalStatus =
+    document.getElementById("globalStatus");
+
+const managementForm =
+    document.getElementById("managementForm");
 
 const groupForm =
-    document.getElementById(
-        "groupForm"
-    );
-
-const group =
-    document.getElementById(
-        "group"
-    );
-
-const groupName =
-    document.getElementById(
-        "groupName"
-    );
-
-const groupRole =
-    document.getElementById(
-        "groupRole"
-    );
-
-const groupDuties =
-    document.getElementById(
-        "groupDuties"
-    );
-
-const groupPhoto =
-    document.getElementById(
-        "groupPhoto"
-    );
-
-const groupPreview =
-    document.getElementById(
-        "groupPreview"
-    );
-
-const groupSave =
-    document.getElementById(
-        "groupSave"
-    );
-
-const viewGroup =
-    document.getElementById(
-        "viewGroup"
-    );
-
-const groupMembers =
-    document.getElementById(
-        "groupMembers"
-    );
+    document.getElementById("groupForm");
 
 const managementMembers =
-    document.getElementById(
-        "managementMembers"
-    );
+    document.getElementById("managementMembers");
+
+const groupMembers =
+    document.getElementById("groupMembers");
+
+const viewGroup =
+    document.getElementById("viewGroup");
 
 
-let selectedPhoto = null;
-
-
-/* ==================================================
-   HELPERS
-================================================== */
-
-function escapeHTML(value) {
-
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
-
-}
-
+/* =================================================
+   STATUS
+================================================= */
 
 function showStatus(
     message,
     type = "success"
 ) {
 
-    statusBox.textContent =
+    globalStatus.textContent =
         message;
 
-    statusBox.className =
-        "status show " +
-        type;
+    globalStatus.className =
+        "status show " + type;
 
 }
 
 
-/* ==================================================
-   PHOTO PREVIEW
-================================================== */
+function clearStatus() {
 
-groupPhoto.addEventListener(
-    "change",
-    () => {
+    globalStatus.className =
+        "status";
 
-        const file =
-            groupPhoto.files[0];
+    globalStatus.textContent =
+        "";
 
-
-        if (!file) {
-
-            selectedPhoto = null;
-
-            groupPreview.textContent =
-                "Photo";
-
-            return;
-
-        }
+}
 
 
-        selectedPhoto =
-            file;
+/* =================================================
+   ESCAPE HTML
+================================================= */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
 
 
-        const reader =
-            new FileReader();
+/* =================================================
+   SUPABASE REST REQUEST
+================================================= */
+
+async function supabaseRequest(
+    endpoint,
+    options = {}
+) {
+
+    const response =
+        await fetch(
+            SUPABASE_URL +
+            endpoint,
+            {
+
+                ...options,
+
+                headers: {
+
+                    "apikey":
+                        SUPABASE_KEY,
+
+                    "Authorization":
+                        "Bearer " +
+                        SUPABASE_KEY,
+
+                    "Content-Type":
+                        "application/json",
+
+                    ...(options.headers || {})
+
+                }
+
+            }
+        );
 
 
-        reader.onload =
-            event => {
-
-                groupPreview.innerHTML = `
-
-                    <img
-                        src="${event.target.result}"
-                        alt="Preview"
-                    >
-
-                `;
-
-            };
+    const text =
+        await response.text();
 
 
-        reader.readAsDataURL(file);
-
-    }
-);
-
-
-/* ==================================================
-   LOAD MANAGEMENT
-================================================== */
-
-async function loadManagement() {
-
-    managementMembers.innerHTML = `
-
-        <div class="empty">
-            Loading profiles...
-        </div>
-
-    `;
+    let data = null;
 
 
     try {
 
-        const result =
-            await supabase
-                .from("management")
-                .select("*")
-                .order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
-                );
+        data =
+            text
+            ?
+            JSON.parse(text)
+            :
+            null;
+
+    }
+
+    catch {
+
+        data = text;
+
+    }
 
 
-        if (result.error) {
+    if (!response.ok) {
 
-            throw result.error;
+        const message =
+            data &&
+            data.message
+            ?
+            data.message
+            :
+            text ||
+            "Supabase request failed.";
+
+        throw new Error(
+            "HTTP " +
+            response.status +
+            ": " +
+            message
+        );
+
+    }
+
+
+    return data;
+
+}
+
+
+/* =================================================
+   UPLOAD PHOTO
+================================================= */
+
+async function uploadPhoto(
+    file
+) {
+
+    if (!file) {
+
+        return null;
+
+    }
+
+
+    if (!file.type.startsWith("image/")) {
+
+        throw new Error(
+            "Please select an image file."
+        );
+
+    }
+
+
+    /*
+       Keep uploads reasonably small.
+    */
+
+    if (file.size > 8 * 1024 * 1024) {
+
+        throw new Error(
+            "Image is too large. Please use an image under 8 MB."
+        );
+
+    }
+
+
+    const originalName =
+        file.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+
+    const allowedExtensions = [
+        "jpg",
+        "jpeg",
+        "png",
+        "webp",
+        "gif"
+    ];
+
+
+    const extension =
+        allowedExtensions.includes(
+            originalName
+        )
+        ?
+        originalName
+        :
+        "jpg";
+
+
+    const fileName =
+        crypto.randomUUID() +
+        "." +
+        extension;
+
+
+    const uploadResponse =
+        await fetch(
+            SUPABASE_URL +
+            "/storage/v1/object/" +
+            STORAGE_BUCKET +
+            "/" +
+            fileName,
+            {
+
+                method: "POST",
+
+                headers: {
+
+                    "apikey":
+                        SUPABASE_KEY,
+
+                    "Authorization":
+                        "Bearer " +
+                        SUPABASE_KEY,
+
+                    "Content-Type":
+                        file.type ||
+                        "image/jpeg",
+
+                    "x-upsert":
+                        "false"
+
+                },
+
+                body: file
+
+            }
+        );
+
+
+    const uploadText =
+        await uploadResponse.text();
+
+
+    if (!uploadResponse.ok) {
+
+        let message =
+            uploadText;
+
+        try {
+
+            const parsed =
+                JSON.parse(uploadText);
+
+            message =
+                parsed.message ||
+                parsed.error ||
+                uploadText;
 
         }
 
+        catch {}
+
+        throw new Error(
+            "Photo upload failed: " +
+            message
+        );
+
+    }
+
+
+    return (
+        SUPABASE_URL +
+        "/storage/v1/object/public/" +
+        STORAGE_BUCKET +
+        "/" +
+        fileName
+    );
+
+}
+
+
+/* =================================================
+   PREVIEW FUNCTION
+================================================= */
+
+function setupPreview(
+    input,
+    preview
+) {
+
+    input.addEventListener(
+        "change",
+        () => {
+
+            const file =
+                input.files[0];
+
+
+            if (!file) {
+
+                preview.innerHTML =
+                    "Photo";
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                event => {
+
+                    preview.innerHTML =
+                        `
+                        <img
+                            src="${event.target.result}"
+                            alt="Preview"
+                        >
+                        `;
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+}
+
+
+setupPreview(
+    document.getElementById("managementPhoto"),
+    document.getElementById("managementPreview")
+);
+
+
+setupPreview(
+    document.getElementById("groupPhoto"),
+    document.getElementById("groupPreview")
+);
+
+
+/* =================================================
+   LOAD MANAGEMENT
+================================================= */
+
+async function loadManagement() {
+
+    managementMembers.innerHTML =
+        `
+        <div class="empty">
+            Loading profiles...
+        </div>
+        `;
+
+
+    try {
 
         const data =
-            result.data || [];
+            await supabaseRequest(
+                "/rest/v1/management?select=*&order=created_at.desc"
+            );
 
 
-        if (data.length === 0) {
+        if (
+            !Array.isArray(data) ||
+            data.length === 0
+        ) {
 
-            managementMembers.innerHTML = `
-
+            managementMembers.innerHTML =
+                `
                 <div class="empty">
                     No management profiles yet.
                 </div>
-
-            `;
+                `;
 
             return;
 
@@ -884,83 +1293,80 @@ async function loadManagement() {
 
 
         managementMembers.innerHTML =
-            data.map(
-                member => `
+            data
+                .map(
+                    member => {
 
-<article class="member">
-
-    <div class="avatar">
-
-        ${
-            member.photo_url
-
-            ?
-
-            `<img
-                src="${escapeHTML(
-                    member.photo_url
-                )}"
-                alt="${escapeHTML(
-                    member.name
-                )}"
-            >`
-
-            :
-
-            "👤"
-        }
-
-    </div>
+                        const image =
+                            member.photo_url;
 
 
-    <div class="info">
+                        return `
 
-        <strong>
-            ${escapeHTML(
-                member.name
-            )}
-        </strong>
+                        <article class="member">
 
-        <span>
-            ${escapeHTML(
-                member.role
-            )}
-        </span>
+                            <div class="avatar">
 
-        <p>
-            ID:
-            ${escapeHTML(
-                member.id
-            )}
+                                ${
+                                    image
+                                    ?
+                                    `
+                                    <img
+                                        src="${escapeHTML(image)}"
+                                        alt="${escapeHTML(member.name)}"
+                                    >
+                                    `
+                                    :
+                                    "Üİ"
+                                }
 
-            <br>
-
-            ${escapeHTML(
-                member.description || ""
-            )}
-        </p>
-
-    </div>
+                            </div>
 
 
-    <button
-        class="delete"
-        data-id="${escapeHTML(
-            member.id
-        )}"
-    >
-        Delete
-    </button>
+                            <div class="info">
 
-</article>
+                                <strong>
+                                    ${escapeHTML(member.name)}
+                                </strong>
 
-                `
-            )
-            .join("");
+                                <span>
+                                    ${escapeHTML(member.role)}
+                                </span>
+
+                                <p>
+                                    ${escapeHTML(
+                                        member.description || ""
+                                    )}
+                                </p>
+
+                                <small class="id-text">
+                                    ID: ${escapeHTML(member.id)}
+                                </small>
+
+                            </div>
+
+
+                            <button
+                                class="delete"
+                                type="button"
+                                data-management-id="${escapeHTML(member.id)}"
+                            >
+                                Delete
+                            </button>
+
+                        </article>
+
+                        `;
+
+                    }
+                )
+                .join("");
 
 
         managementMembers
-            .querySelectorAll(".delete")
+            .querySelectorAll(
+                "[data-management-id]"
+            )
             .forEach(
                 button => {
 
@@ -969,7 +1375,7 @@ async function loadManagement() {
                         () => {
 
                             deleteManagement(
-                                button.dataset.id
+                                button.dataset.managementId
                             );
 
                         }
@@ -983,105 +1389,342 @@ async function loadManagement() {
     catch (error) {
 
         console.error(
-            "MANAGEMENT ERROR:",
+            "MANAGEMENT LOAD ERROR:",
             error
         );
 
 
-        managementMembers.innerHTML = `
-
-            <div class="empty">
+        managementMembers.innerHTML =
+            `
+            <div class="error-box">
 
                 <strong>
-                    Management profiles could not be loaded.
+                    Management could not be loaded.
                 </strong>
 
                 <br><br>
 
                 ${escapeHTML(
-                    error.message ||
-                    String(error)
+                    error.message
                 )}
 
             </div>
-
-        `;
+            `;
 
     }
 
 }
 
 
-/* ==================================================
-   LOAD GROUP MEMBERS
-================================================== */
+/* =================================================
+   ADD MANAGEMENT
+================================================= */
 
-async function loadGroupMembers(
-    groupId
+managementForm.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+
+        const button =
+            document.getElementById(
+                "managementSave"
+            );
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "Saving...";
+
+
+        try {
+
+            clearStatus();
+
+
+            const name =
+                document
+                    .getElementById(
+                        "managementName"
+                    )
+                    .value
+                    .trim();
+
+
+            const role =
+                document
+                    .getElementById(
+                        "managementRole"
+                    )
+                    .value
+                    .trim();
+
+
+            const description =
+                document
+                    .getElementById(
+                        "managementDescription"
+                    )
+                    .value
+                    .trim();
+
+
+            const photoFile =
+                document
+                    .getElementById(
+                        "managementPhoto"
+                    )
+                    .files[0];
+
+
+            let photoURL =
+                null;
+
+
+            if (photoFile) {
+
+                showStatus(
+                    "Uploading management photo...",
+                    "info-status"
+                );
+
+
+                photoURL =
+                    await uploadPhoto(
+                        photoFile
+                    );
+
+            }
+
+
+            showStatus(
+                "Adding management member...",
+                "info-status"
+            );
+
+
+            await supabaseRequest(
+                "/rest/v1/management",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Prefer":
+                            "return=minimal"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            name:
+                                name,
+
+                            role:
+                                role,
+
+                            description:
+                                description,
+
+                            photo_url:
+                                photoURL
+
+                        })
+
+                }
+            );
+
+
+            managementForm.reset();
+
+
+            document
+                .getElementById(
+                    "managementPreview"
+                )
+                .textContent =
+                "Photo";
+
+
+            showStatus(
+                "Management member added successfully!"
+            );
+
+
+            await loadManagement();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "ADD MANAGEMENT ERROR:",
+                error
+            );
+
+
+            showStatus(
+                "Error: " +
+                error.message,
+                "error"
+            );
+
+        }
+
+        finally {
+
+            button.disabled = false;
+
+            button.textContent =
+                "+ Add Management Member";
+
+        }
+
+    }
+);
+
+
+/* =================================================
+   DELETE MANAGEMENT
+================================================= */
+
+async function deleteManagement(
+    id
 ) {
 
-    if (!groupId) {
-
-        groupMembers.innerHTML = `
-
-            <div class="empty">
-                Select a group to see its members.
-            </div>
-
-        `;
+    if (
+        !confirm(
+            "Delete this management profile?"
+        )
+    ) {
 
         return;
 
     }
 
 
-    groupMembers.innerHTML = `
+    try {
 
+        showStatus(
+            "Deleting management member...",
+            "info-status"
+        );
+
+
+        await supabaseRequest(
+            "/rest/v1/management?id=eq." +
+            encodeURIComponent(id),
+            {
+
+                method: "DELETE",
+
+                headers: {
+
+                    "Prefer":
+                        "return=minimal"
+
+                }
+
+            }
+        );
+
+
+        showStatus(
+            "Management profile deleted."
+        );
+
+
+        await loadManagement();
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "DELETE MANAGEMENT ERROR:",
+            error
+        );
+
+
+        showStatus(
+            "Delete error: " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =================================================
+   LOAD GROUP MEMBERS
+================================================= */
+
+async function loadGroupMembers(
+    groupID
+) {
+
+    if (!groupID) {
+
+        groupMembers.innerHTML =
+            `
+            <div class="empty">
+                Select a group to see its members.
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    const group =
+        GROUPS[groupID];
+
+
+    groupMembers.innerHTML =
+        `
         <div class="empty">
-            Loading group members...
+            Loading ${escapeHTML(group.name)} members...
         </div>
-
-    `;
+        `;
 
 
     try {
 
-        const result =
-            await supabase
-                .from("group_members")
-                .select("*")
-                .eq(
-                    "group_id",
-                    groupId
-                )
-                .order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
-                );
-
-
-        if (result.error) {
-
-            throw result.error;
-
-        }
-
-
         const data =
-            result.data || [];
+            await supabaseRequest(
+                "/rest/v1/group_members" +
+                "?select=*" +
+                "&group_id=eq." +
+                encodeURIComponent(groupID) +
+                "&order=created_at.desc"
+            );
 
 
-        if (data.length === 0) {
+        if (
+            !Array.isArray(data) ||
+            data.length === 0
+        ) {
 
-            groupMembers.innerHTML = `
-
+            groupMembers.innerHTML =
+                `
                 <div class="empty">
-                    No members in this group yet.
-                </div>
 
-            `;
+                    ${group.icon}
+                    ${escapeHTML(group.name)}
+
+                    <br><br>
+
+                    No members in this group yet.
+
+                </div>
+                `;
 
             return;
 
@@ -1089,85 +1732,85 @@ async function loadGroupMembers(
 
 
         groupMembers.innerHTML =
-            data.map(
-                member => `
+            data
+                .map(
+                    member => {
 
-<article class="member">
-
-    <div class="avatar">
-
-        ${
-            member.photo_url
-
-            ?
-
-            `<img
-                src="${escapeHTML(
-                    member.photo_url
-                )}"
-                alt="${escapeHTML(
-                    member.name
-                )}"
-            >`
-
-            :
-
-            "👤"
-        }
-
-    </div>
+                        const image =
+                            member.photo_url;
 
 
-    <div class="info">
+                        return `
 
-        <strong>
-            ${escapeHTML(
-                member.name
-            )}
-        </strong>
+                        <article class="member">
 
-        <span>
-            ${escapeHTML(
-                member.role
-            )}
-        </span>
+                            <div class="avatar">
 
-        <p>
+                                ${
+                                    image
+                                    ?
+                                    `
+                                    <img
+                                        src="${escapeHTML(image)}"
+                                        alt="${escapeHTML(member.name)}"
+                                    >
+                                    `
+                                    :
+                                    "Üİ"
+                                }
 
-            ID:
-            ${escapeHTML(
-                member.id
-            )}
-
-            <br>
-
-            ${escapeHTML(
-                member.duties || ""
-            )}
-
-        </p>
-
-    </div>
+                            </div>
 
 
-    <button
-        class="delete"
-        data-id="${escapeHTML(
-            member.id
-        )}"
-    >
-        Delete
-    </button>
+                            <div class="info">
 
-</article>
+                                <strong>
+                                    ${escapeHTML(member.name)}
+                                </strong>
 
-                `
-            )
-            .join("");
+                                <span>
+                                    ${escapeHTML(member.role)}
+                                </span>
+
+                                <p>
+                                    ${escapeHTML(
+                                        member.duties || ""
+                                    )}
+                                </p>
+
+                                <span class="group-tag">
+                                    ${group.icon}
+                                    ${escapeHTML(group.name)}
+                                </span>
+
+                                <small class="id-text">
+                                    ID: ${escapeHTML(member.id)}
+                                </small>
+
+                            </div>
+
+
+                            <button
+                                class="delete"
+                                type="button"
+                                data-group-member-id="${escapeHTML(member.id)}"
+                            >
+                                Delete
+                            </button>
+
+                        </article>
+
+                        `;
+
+                    }
+                )
+                .join("");
 
 
         groupMembers
-            .querySelectorAll(".delete")
+            .querySelectorAll(
+                "[data-group-member-id]"
+            )
             .forEach(
                 button => {
 
@@ -1176,8 +1819,8 @@ async function loadGroupMembers(
                         () => {
 
                             deleteGroupMember(
-                                button.dataset.id,
-                                groupId
+                                button.dataset.groupMemberId,
+                                groupID
                             );
 
                         }
@@ -1191,14 +1834,14 @@ async function loadGroupMembers(
     catch (error) {
 
         console.error(
-            "GROUP MEMBERS ERROR:",
+            "GROUP MEMBER LOAD ERROR:",
             error
         );
 
 
-        groupMembers.innerHTML = `
-
-            <div class="empty">
+        groupMembers.innerHTML =
+            `
+            <div class="error-box">
 
                 <strong>
                     Group members could not be loaded.
@@ -1207,22 +1850,20 @@ async function loadGroupMembers(
                 <br><br>
 
                 ${escapeHTML(
-                    error.message ||
-                    String(error)
+                    error.message
                 )}
 
             </div>
-
-        `;
+            `;
 
     }
 
 }
 
 
-/* ==================================================
+/* =================================================
    GROUP SELECT
-================================================== */
+================================================= */
 
 viewGroup.addEventListener(
     "change",
@@ -1236,9 +1877,9 @@ viewGroup.addEventListener(
 );
 
 
-/* ==================================================
+/* =================================================
    ADD GROUP MEMBER
-================================================== */
+================================================= */
 
 groupForm.addEventListener(
     "submit",
@@ -1247,84 +1888,274 @@ groupForm.addEventListener(
         event.preventDefault();
 
 
-        groupSave.disabled =
-            true;
+        const button =
+            document.getElementById(
+                "groupSave"
+            );
 
-        groupSave.textContent =
+
+        button.disabled = true;
+
+        button.textContent =
             "Saving...";
 
 
         try {
 
-            const groupId =
-                group.value;
+            clearStatus();
+
+
+            const groupID =
+                document
+                    .getElementById(
+                        "groupSelect"
+                    )
+                    .value;
+
 
             const name =
-                groupName.value.trim();
+                document
+                    .getElementById(
+                        "groupName"
+                    )
+                    .value
+                    .trim();
+
 
             const role =
-                groupRole.value.trim();
+                document
+                    .getElementById(
+                        "groupRole"
+                    )
+                    .value
+                    .trim();
+
 
             const duties =
-                groupDuties.value.trim();
+                document
+                    .getElementById(
+                        "groupDuties"
+                    )
+                    .value
+                    .trim();
+
+
+            const photoFile =
+                document
+                    .getElementById(
+                        "groupPhoto"
+                    )
+                    .files[0];
 
 
             let photoURL =
                 null;
 
 
-            /* UPLOAD PHOTO */
-
-            if (selectedPhoto) {
+            if (photoFile) {
 
                 showStatus(
-                    "Uploading photo..."
+                    "Uploading group member photo...",
+                    "info-status"
                 );
 
 
-                const extension =
-                    selectedPhoto.name
-                        .split(".")
-                        .pop()
-                        .toLowerCase();
+                photoURL =
+                    await uploadPhoto(
+                        photoFile
+                    );
+
+            }
 
 
-                const fileName =
-                    crypto.randomUUID() +
-                    "." +
-                    extension;
+            showStatus(
+                "Adding group member...",
+                "info-status"
+            );
 
 
-                const upload =
-                    await supabase
-                        .storage
-                        .from(
-                            "management-photos"
-                        )
-                        .upload(
-                            fileName,
-                            selectedPhoto,
-                            {
-                                cacheControl:
-                                    "3600",
+            await supabaseRequest(
+                "/rest/v1/group_members",
+                {
 
-                                upsert:
-                                    false
-                            }
-                        );
+                    method: "POST",
+
+                    headers: {
+
+                        "Prefer":
+                            "return=minimal"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            group_id:
+                                groupID,
+
+                            name:
+                                name,
+
+                            role:
+                                role,
+
+                            duties:
+                                duties,
+
+                            photo_url:
+                                photoURL
+
+                        })
+
+                }
+            );
 
 
-                if (upload.error) {
+            groupForm.reset();
 
-                    throw upload.error;
+
+            document
+                .getElementById(
+                    "groupPreview"
+                )
+                .textContent =
+                "Photo";
+
+
+            showStatus(
+                "Group member added successfully!"
+            );
+
+
+            /*
+               Automatically show the group
+               that was just updated.
+            */
+
+            viewGroup.value =
+                groupID;
+
+
+            await loadGroupMembers(
+                groupID
+            );
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "ADD GROUP MEMBER ERROR:",
+                error
+            );
+
+
+            showStatus(
+                "Error: " +
+                error.message,
+                "error"
+            );
+
+        }
+
+        finally {
+
+            button.disabled = false;
+
+            button.textContent =
+                "+ Add Group Member";
+
+        }
+
+    }
+);
+
+
+/* =================================================
+   DELETE GROUP MEMBER
+================================================= */
+
+async function deleteGroupMember(
+    id,
+    groupID
+) {
+
+    if (
+        !confirm(
+            "Delete this group member?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        showStatus(
+            "Deleting group member...",
+            "info-status"
+        );
+
+
+        await supabaseRequest(
+            "/rest/v1/group_members?id=eq." +
+            encodeURIComponent(id),
+            {
+
+                method: "DELETE",
+
+                headers: {
+
+                    "Prefer":
+                        "return=minimal"
 
                 }
 
+            }
+        );
 
-                photoURL =
-                    supabase
-                        .storage
-                        .from(
-                            "management-photos"
-                        )
-  
+
+        showStatus(
+            "Group member deleted."
+        );
+
+
+        await loadGroupMembers(
+            groupID
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "DELETE GROUP MEMBER ERROR:",
+            error
+        );
+
+
+        showStatus(
+            "Delete error: " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* =================================================
+   START
+================================================= */
+
+loadManagement();
+
+</script>
+
+
+</body>
+
+</html>
