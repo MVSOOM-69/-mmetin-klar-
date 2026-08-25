@@ -1,116 +1,166 @@
 /* =========================================
    ÜMMETİN IŞIKLARI
-   GROUP DATA
+   GROUP DATA + SUPABASE MEMBERS
 ========================================= */
-
-const groupData = {
-
-    yardimlasma: {
-        title: "Yardımlaşma",
-        icon: "🤝",
-        description:
-            "Yardımlaşma grubunun gerçek amacı ve yaptığı çalışmalar daha sonra burada açıklanacak.",
-        mission:
-            "Gerçek görev bilgisi daha sonra eklenecek.",
-        work:
-            "Gerçek çalışma bilgileri daha sonra eklenecek.",
-        events:
-            "Grup etkinlikleri daha sonra eklenecek."
-    },
-
-    din: {
-        title: "Din",
-        icon: "☪️",
-        description:
-            "Din grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
-        mission:
-            "Görev bilgisi daha sonra eklenecek.",
-        work:
-            "Çalışma bilgisi daha sonra eklenecek.",
-        events:
-            "Etkinlik bilgisi daha sonra eklenecek."
-    },
-
-    kultur: {
-        title: "Kültür",
-        icon: "🕌",
-        description:
-            "Kültür grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
-        mission:
-            "Görev bilgisi daha sonra eklenecek.",
-        work:
-            "Çalışma bilgisi daha sonra eklenecek.",
-        events:
-            "Etkinlik bilgisi daha sonra eklenecek."
-    },
-
-    spor: {
-        title: "Spor",
-        icon: "⚽",
-        description:
-            "Spor grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
-        mission:
-            "Spor grubunun görev bilgisi daha sonra eklenecek.",
-        work:
-            "Spor grubunun çalışmaları daha sonra eklenecek.",
-        events:
-            "Spor etkinlikleri daha sonra eklenecek."
-    },
-
-    it: {
-        title: "İT",
-        icon: "🖥️",
-        description:
-            "İT grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
-        mission:
-            "Görev bilgisi daha sonra eklenecek.",
-        work:
-            "Çalışma bilgisi daha sonra eklenecek.",
-        events:
-            "Etkinlik bilgisi daha sonra eklenecek."
-    },
-
-    finans: {
-        title: "Finans",
-        icon: "📊",
-        description:
-            "Finans grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
-        mission:
-            "Görev bilgisi daha sonra eklenecek.",
-        work:
-            "Çalışma bilgisi daha sonra eklenecek.",
-        events:
-            "Etkinlik bilgisi daha sonra eklenecek."
-    }
-
-};
 
 
 /* =========================================
    SUPABASE
 ========================================= */
 
+import {
+    createClient
+} from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+
 const SUPABASE_URL =
     "https://dufqdjvjszewhhakjibb.supabase.co";
+
 
 const SUPABASE_KEY =
     "sb_publishable_zdE8Z15zobFjWJ0P86B5Qg_55sAbHer";
 
 
+const supabase =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
 /* =========================================
-   ESCAPE HTML
+   GROUP DATA
 ========================================= */
 
-function escapeHTML(value) {
+const groupData = {
 
-    return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    yardimlasma: {
 
-}
+        title: "Yardımlaşma",
+
+        icon: "🤝",
+
+        description:
+            "Yardımlaşma grubunun gerçek amacı ve yaptığı çalışmalar daha sonra burada açıklanacak.",
+
+        mission:
+            "Gerçek görev bilgisi daha sonra eklenecek.",
+
+        work:
+            "Gerçek çalışma bilgileri daha sonra eklenecek.",
+
+        events:
+            "Grup etkinlikleri daha sonra eklenecek."
+
+    },
+
+
+    din: {
+
+        title: "Din",
+
+        icon: "☪️",
+
+        description:
+            "Din grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
+
+        mission:
+            "Din grubunun görevleri daha sonra açıklanacak.",
+
+        work:
+            "Din grubunun çalışmaları daha sonra eklenecek.",
+
+        events:
+            "Din grubunun etkinlikleri daha sonra eklenecek."
+
+    },
+
+
+    kultur: {
+
+        title: "Kültür",
+
+        icon: "🕌",
+
+        description:
+            "Kültür grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
+
+        mission:
+            "Kültür grubunun görevleri daha sonra açıklanacak.",
+
+        work:
+            "Kültür çalışmalarımız daha sonra açıklanacak.",
+
+        events:
+            "Kültür etkinlikleri daha sonra eklenecek."
+
+    },
+
+
+    spor: {
+
+        title: "Spor",
+
+        icon: "⚽",
+
+        description:
+            "Spor grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
+
+        mission:
+            "Spor grubunun görevleri daha sonra açıklanacak.",
+
+        work:
+            "Spor faaliyetleri daha sonra eklenecek.",
+
+        events:
+            "Spor etkinlikleri daha sonra eklenecek."
+
+    },
+
+
+    it: {
+
+        title: "İT",
+
+        icon: "🖥️",
+
+        description:
+            "İT grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
+
+        mission:
+            "İT grubunun görevleri daha sonra açıklanacak.",
+
+        work:
+            "İT çalışmalarımız daha sonra açıklanacak.",
+
+        events:
+            "İT etkinlikleri daha sonra eklenecek."
+
+    },
+
+
+    finans: {
+
+        title: "Finans",
+
+        icon: "📊",
+
+        description:
+            "Finans grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
+
+        mission:
+            "Finans grubunun görevleri daha sonra açıklanacak.",
+
+        work:
+            "Finans çalışmaları daha sonra açıklanacak.",
+
+        events:
+            "Finans etkinlikleri daha sonra eklenecek."
+
+    }
+
+};
 
 
 /* =========================================
@@ -134,7 +184,7 @@ const group =
 
 
 /* =========================================
-   GROUP INFORMATION
+   PAGE INFORMATION
 ========================================= */
 
 document.title =
@@ -142,40 +192,134 @@ document.title =
     " | Ümmetin Işıkları";
 
 
-document.getElementById(
-    "groupIcon"
-).textContent =
-    group.icon;
+const groupIcon =
+    document.getElementById(
+        "groupIcon"
+    );
 
 
-document.getElementById(
-    "groupTitle"
-).textContent =
-    group.title;
+const groupTitle =
+    document.getElementById(
+        "groupTitle"
+    );
 
 
-document.getElementById(
-    "groupDescription"
-).textContent =
-    group.description;
+const groupDescription =
+    document.getElementById(
+        "groupDescription"
+    );
 
 
-document.getElementById(
-    "mission"
-).textContent =
-    group.mission;
+const mission =
+    document.getElementById(
+        "mission"
+    );
 
 
-document.getElementById(
-    "work"
-).textContent =
-    group.work;
+const work =
+    document.getElementById(
+        "work"
+    );
 
 
-document.getElementById(
-    "events"
-).textContent =
-    group.events;
+const events =
+    document.getElementById(
+        "events"
+    );
+
+
+if (groupIcon) {
+
+    groupIcon.textContent =
+        group.icon;
+
+}
+
+
+if (groupTitle) {
+
+    groupTitle.textContent =
+        group.title;
+
+}
+
+
+if (groupDescription) {
+
+    groupDescription.textContent =
+        group.description;
+
+}
+
+
+if (mission) {
+
+    mission.textContent =
+        group.mission;
+
+}
+
+
+if (work) {
+
+    work.textContent =
+        group.work;
+
+}
+
+
+if (events) {
+
+    events.textContent =
+        group.events;
+
+}
+
+
+/* =========================================
+   SECURITY
+========================================= */
+
+function escapeHTML(value) {
+
+    return String(value || "")
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================
+   ORGANISATION TEAM
+========================================= */
+
+const teamGrid =
+    document.getElementById(
+        "teamGrid"
+    );
 
 
 /* =========================================
@@ -184,13 +328,10 @@ document.getElementById(
 
 async function loadGroupMembers() {
 
-    const teamGrid =
-        document.getElementById(
-            "teamGrid"
-        );
-
     if (!teamGrid) {
+
         return;
+
     }
 
 
@@ -207,11 +348,11 @@ async function loadGroupMembers() {
             </small>
 
             <h3>
-                Loading...
+                Ekip üyeleri yükleniyor...
             </h3>
 
             <p>
-                Ekip üyeleri yükleniyor...
+                Lütfen bekleyin.
             </p>
 
         </article>
@@ -221,61 +362,48 @@ async function loadGroupMembers() {
 
     try {
 
-        const response =
-            await fetch(
-                SUPABASE_URL +
-                "/rest/v1/group_members?group_id=eq." +
-                encodeURIComponent(selectedGroup) +
-                "&select=*",
-                {
-                    method: "GET",
+        const result =
+            await supabase
 
-                    headers: {
-                        "apikey":
-                            SUPABASE_KEY,
+                .from("group_members")
 
-                        "Authorization":
-                            "Bearer " +
-                            SUPABASE_KEY,
+                .select("*")
 
-                        "Content-Type":
-                            "application/json"
+                .eq(
+                    "group_id",
+                    selectedGroup
+                )
+
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
                     }
-                }
-            );
+                );
 
 
-        if (!response.ok) {
+        console.log(
+            "GROUP MEMBERS:",
+            result
+        );
 
-            const errorText =
-                await response.text();
 
-            throw new Error(
-                "Supabase HTTP " +
-                response.status +
-                ": " +
-                errorText
-            );
+        if (result.error) {
+
+            throw result.error;
 
         }
 
 
         const members =
-            await response.json();
+            result.data || [];
 
 
-        console.log(
-            "Group members:",
-            members
-        );
-
-
-        /* =================================
+        /* =====================================
            NO MEMBERS
-        ================================= */
+        ===================================== */
 
         if (
-            !Array.isArray(members) ||
             members.length === 0
         ) {
 
@@ -296,8 +424,8 @@ async function loadGroupMembers() {
                     </h3>
 
                     <p>
-                        Gerçek ekip üyeleri daha sonra
-                        eklenecek.
+                        Bu grubun ekip üyeleri
+                        henüz eklenmedi.
                     </p>
 
                 </article>
@@ -305,81 +433,93 @@ async function loadGroupMembers() {
             `;
 
             return;
+
         }
 
 
-        /* =================================
-           DISPLAY MEMBERS
-        ================================= */
+        /* =====================================
+           MEMBERS FOUND
+        ===================================== */
 
         teamGrid.innerHTML =
-            members.map(
-                member => {
+            members
+                .map(
+                    member => {
 
-                    const name =
-                        member.name ||
-                        "İsimsiz";
-
-                    const role =
-                        member.role ||
-                        "EKİP";
-
-                    const duties =
-                        member.duties ||
-                        "";
-
-                    const image =
-                        member.photo_url ||
-                        "";
+                        const photo =
+                            member.photo_url;
 
 
-                    return `
+                        return `
 
-                        <article class="team-card">
+                            <article
+                                class="team-card"
+                            >
 
-                            <div class="team-photo">
+                                <div
+                                    class="team-photo"
+                                >
 
-                                ${
-                                    image
+                                    ${
+                                        photo
 
-                                    ?
+                                        ?
 
-                                    `
-                                    <img
-                                        src="${escapeHTML(image)}"
-                                        alt="${escapeHTML(name)}"
-                                    >
-                                    `
+                                        `
+                                        <img
+                                            src="${escapeHTML(
+                                                photo
+                                            )}"
+                                            alt="${escapeHTML(
+                                                member.name
+                                            )}"
+                                        >
+                                        `
 
-                                    :
+                                        :
 
-                                    "Üİ"
-                                }
+                                        "Üİ"
+                                    }
 
-                            </div>
-
-
-                            <small>
-                                ${escapeHTML(role)}
-                            </small>
-
-
-                            <h3>
-                                ${escapeHTML(name)}
-                            </h3>
+                                </div>
 
 
-                            <p>
-                                ${escapeHTML(duties)}
-                            </p>
+                                <small>
 
-                        </article>
+                                    ${escapeHTML(
+                                        member.role ||
+                                        "EKİP"
+                                    )}
 
-                    `;
+                                </small>
 
-                }
-            ).join("");
 
+                                <h3>
+
+                                    ${escapeHTML(
+                                        member.name
+                                    )}
+
+                                </h3>
+
+
+                                <p>
+
+                                    ${escapeHTML(
+                                        member.duties ||
+                                        ""
+                                    )}
+
+                                </p>
+
+
+                            </article>
+
+                        `;
+
+                    }
+                )
+                .join("");
 
     }
 
@@ -400,7 +540,7 @@ async function loadGroupMembers() {
                 </div>
 
                 <small>
-                    ERROR
+                    EKİP
                 </small>
 
                 <h3>
@@ -408,10 +548,7 @@ async function loadGroupMembers() {
                 </h3>
 
                 <p>
-                    ${escapeHTML(
-                        error.message ||
-                        "Unknown error"
-                    )}
+                    Lütfen sayfayı yenileyin.
                 </p>
 
             </article>
