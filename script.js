@@ -69,7 +69,6 @@ const groups = [
 const groupsGrid =
     document.getElementById("groupsGrid");
 
-
 if (groupsGrid) {
 
     groupsGrid.innerHTML =
@@ -92,7 +91,6 @@ if (groupsGrid) {
                         ${group.icon}
                     </div>
 
-
                     <span class="group-number">
 
                         ${String(
@@ -101,24 +99,19 @@ if (groupsGrid) {
 
                     </span>
 
-
                     <h3>
-                        ${group.name}
+                        ${escapeHTML(group.name)}
                     </h3>
 
-
                     <p>
-                        ${group.description}
+                        ${escapeHTML(group.description)}
                     </p>
-
 
                     <a
                         class="card-link"
-                        href="
-                            group.html?group=${encodeURIComponent(
-                                group.id
-                            )}
-                        "
+                        href="group.html?group=${encodeURIComponent(
+                            group.id
+                        )}"
                     >
 
                         Grubu Keşfet →
@@ -136,23 +129,25 @@ if (groupsGrid) {
 
 
 /* =========================================
-   SUPABASE
+   SUPABASE MANAGEMENT SYSTEM
 ========================================= */
+
+/*
+   IMPORTANT:
+   Only the publishable key is used here.
+   NEVER put the sb_secret key in this file.
+*/
 
 const SUPABASE_URL =
     "https://dufqdjvjszewhhakjibb.supabase.co";
 
 const SUPABASE_KEY =
-    "sb_publishable_zdE8Z15zobFJWeJ0P86B5Qg_55sAbHer";
+    "sb_publishable_zdE8Z15zobFjWJ0P86B5Qg_55sAbHer";
 
 
-let supabaseClient = null;
-
-
-/*
-   Load Supabase only when the Management
-   section exists.
-*/
+/* =========================================
+   MANAGEMENT
+========================================= */
 
 async function loadManagement() {
 
@@ -161,63 +156,101 @@ async function loadManagement() {
             "managementGrid"
         );
 
-
     if (!managementGrid) {
         return;
     }
 
 
+    managementGrid.innerHTML = `
+
+        <article class="person-card reveal">
+
+            <div class="avatar">
+                ...
+            </div>
+
+            <small>
+                YÖNETİM
+            </small>
+
+            <h3>
+                Loading...
+            </h3>
+
+            <p>
+                Connecting to management database...
+            </p>
+
+        </article>
+
+    `;
+
+
     try {
 
         /*
-           Load Supabase library dynamically.
+           Load Supabase.
         */
 
         const {
             createClient
-        } =
-            await import(
-                "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
-            );
+        } = await import(
+            "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm"
+        );
 
 
-        supabaseClient =
+        const supabase =
             createClient(
                 SUPABASE_URL,
                 SUPABASE_KEY
             );
 
 
+        console.log(
+            "ÜMMETİN IŞIKLARI: Supabase connected."
+        );
+
+
         /*
            Get management profiles.
         */
 
-        const result =
-            await supabaseClient
+        const {
+            data,
+            error
+        } =
+            await supabase
                 .from("management")
-                .select("*")
-                .order(
-                    "created_at",
-                    {
-                        ascending: true
-                    }
-                );
+                .select("*");
 
 
-        if (result.error) {
+        console.log(
+            "ÜMMETİN IŞIKLARI: Management response:",
+            {
+                data,
+                error
+            }
+        );
 
-            throw result.error;
+
+        /*
+           Show actual database error.
+        */
+
+        if (error) {
+
+            throw error;
 
         }
 
 
         /*
-           No profiles yet.
+           No members yet.
         */
 
         if (
-            !result.data ||
-            result.data.length === 0
+            !data ||
+            data.length === 0
         ) {
 
             managementGrid.innerHTML = `
@@ -252,16 +285,29 @@ async function loadManagement() {
 
 
         /*
-           Create management cards.
+           Create cards from Supabase.
         */
 
         managementGrid.innerHTML =
 
-            result.data.map(
+            data.map(
                 person => {
 
+                    const name =
+                        person.name ||
+                        "İsimsiz";
+
+                    const role =
+                        person.role ||
+                        "YÖNETİM";
+
+                    const description =
+                        person.description ||
+                        "";
+
                     const image =
-                        person.photo_url;
+                        person.photo_url ||
+                        "";
 
 
                     return `
@@ -277,14 +323,16 @@ async function loadManagement() {
 
                                 ?
 
-                                `<img
+                                `
+                                <img
                                     src="${escapeHTML(
                                         image
                                     )}"
                                     alt="${escapeHTML(
-                                        person.name
+                                        name
                                     )}"
-                                >`
+                                >
+                                `
 
                                 :
 
@@ -296,23 +344,21 @@ async function loadManagement() {
 
                         <small>
                             ${escapeHTML(
-                                person.role ||
-                                "YÖNETİM"
+                                role
                             )}
                         </small>
 
 
                         <h3>
                             ${escapeHTML(
-                                person.name
+                                name
                             )}
                         </h3>
 
 
                         <p>
                             ${escapeHTML(
-                                person.description ||
-                                ""
+                                description
                             )}
                         </p>
 
@@ -325,12 +371,14 @@ async function loadManagement() {
 
 
         /*
-           Observe newly-created cards
-           for scroll reveal.
+           Activate scroll animations
+           for the new cards.
         */
 
         managementGrid
-            .querySelectorAll(".reveal")
+            .querySelectorAll(
+                ".reveal"
+            )
             .forEach(
                 element => {
 
@@ -342,15 +390,27 @@ async function loadManagement() {
             );
 
 
+        console.log(
+            "ÜMMETİN IŞIKLARI: Management loaded successfully."
+        );
+
     }
+
 
     catch (error) {
 
         console.error(
-            "Management loading error:",
+            "ÜMMETİN IŞIKLARI MANAGEMENT ERROR:",
             error
         );
 
+
+        /*
+           IMPORTANT:
+           Instead of silently saying
+           "could not load", show the
+           actual error.
+        */
 
         managementGrid.innerHTML = `
 
@@ -363,15 +423,19 @@ async function loadManagement() {
                 </div>
 
                 <small>
-                    YÖNETİM
+                    MANAGEMENT ERROR
                 </small>
 
                 <h3>
-                    Yönetim bilgileri yüklenemedi
+                    ${escapeHTML(
+                        error.message ||
+                        String(error)
+                    )}
                 </h3>
 
                 <p>
-                    Lütfen sayfayı yenileyin.
+                    The management profiles could not
+                    be loaded from Supabase.
                 </p>
 
             </article>
@@ -390,11 +454,31 @@ async function loadManagement() {
 function escapeHTML(value) {
 
     return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
 
 }
 
@@ -442,9 +526,13 @@ document
                 "click",
                 () => {
 
-                    navigation.classList.remove(
-                        "open"
-                    );
+                    if (navigation) {
+
+                        navigation.classList.remove(
+                            "open"
+                        );
+
+                    }
 
                 }
             );
@@ -492,7 +580,9 @@ const observer =
 
 
 document
-    .querySelectorAll(".reveal")
+    .querySelectorAll(
+        ".reveal"
+    )
     .forEach(
         element => {
 
@@ -505,7 +595,7 @@ document
 
 
 /* =========================================
-   START MANAGEMENT
+   START
 ========================================= */
 
 loadManagement();
