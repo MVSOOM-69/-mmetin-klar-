@@ -142,8 +142,6 @@ async function loadManagement() {
     }
 
 
-    /* Loading message */
-
     managementGrid.innerHTML = `
 
         <article class="person-card reveal">
@@ -173,9 +171,6 @@ async function loadManagement() {
 
         /*
            Direct Supabase REST request.
-
-           No external Supabase JavaScript
-           library is required.
         */
 
         const response =
@@ -200,10 +195,6 @@ async function loadManagement() {
             );
 
 
-        /*
-           Check HTTP response.
-        */
-
         if (!response.ok) {
 
             const errorText =
@@ -219,10 +210,6 @@ async function loadManagement() {
         }
 
 
-        /*
-           Convert response to JSON.
-        */
-
         const data =
             await response.json();
 
@@ -234,7 +221,7 @@ async function loadManagement() {
 
 
         /*
-           No profiles.
+           No management members.
         */
 
         if (
@@ -271,7 +258,7 @@ async function loadManagement() {
 
 
         /*
-           Create cards.
+           Create management cards.
         */
 
         managementGrid.innerHTML =
@@ -339,7 +326,8 @@ async function loadManagement() {
 
 
         /*
-           Add scroll animation.
+           Activate scroll animation
+           for management cards.
         */
 
         managementGrid
@@ -347,13 +335,9 @@ async function loadManagement() {
             .forEach(
                 element => {
 
-                    if (typeof observer !== "undefined") {
-
-                        observer.observe(
-                            element
-                        );
-
-                    }
+                    observer.observe(
+                        element
+                    );
 
                 }
             );
@@ -368,11 +352,6 @@ async function loadManagement() {
             error
         );
 
-
-        /*
-           Show the real error instead of
-           hiding it behind a generic message.
-        */
 
         managementGrid.innerHTML = `
 
@@ -439,11 +418,14 @@ const navigation =
     );
 
 
-if (menuButton && navigation) {
+if (
+    menuButton &&
+    navigation
+) {
 
     menuButton.addEventListener(
         "click",
-        () => {
+        function () {
 
             navigation.classList.toggle(
                 "open"
@@ -452,33 +434,27 @@ if (menuButton && navigation) {
         }
     );
 
-}
 
+    navigation
+        .querySelectorAll("a")
+        .forEach(
+            link => {
 
-document
-    .querySelectorAll(
-        "#navigation a"
-    )
-    .forEach(
-        link => {
-
-            link.addEventListener(
-                "click",
-                () => {
-
-                    if (navigation) {
+                link.addEventListener(
+                    "click",
+                    function () {
 
                         navigation.classList.remove(
                             "open"
                         );
 
                     }
+                );
 
-                }
-            );
+            }
+        );
 
-        }
-    );
+}
 
 
 /* =========================================
