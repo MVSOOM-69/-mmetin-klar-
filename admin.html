@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="UTF-8">
@@ -9,7 +8,6 @@
 <title>Ümmetin Işıkları — Admin</title>
 
 <style>
-
 * {
     box-sizing: border-box;
     margin: 0;
@@ -20,7 +18,7 @@ body {
     background: #fffdf8;
     color: #202020;
     font-family: Inter, system-ui, -apple-system,
-        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
     line-height: 1.6;
 }
 
@@ -311,20 +309,15 @@ button {
 }
 
 .diagnostic {
-    margin-top: 25px;
-    padding: 18px;
+    margin-top: 15px;
+    padding: 16px;
     background: #111;
-    color: #fff;
-    border-radius: 18px;
-    display: none;
+    color: white;
+    border-radius: 15px;
     font-family: monospace;
-    font-size: .75rem;
+    font-size: .72rem;
     white-space: pre-wrap;
     word-break: break-word;
-}
-
-.diagnostic.show {
-    display: block;
 }
 
 @media(max-width:750px) {
@@ -349,19 +342,12 @@ button {
         padding: 22px;
     }
 
-    .member {
-        align-items: flex-start;
-    }
-
 }
-
 </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -382,7 +368,6 @@ button {
 
 </a>
 
-
 <a
     href="index.html"
     class="back"
@@ -394,7 +379,6 @@ button {
 
 
 <main>
-
 
 <div class="title">
 
@@ -416,262 +400,262 @@ button {
 <div class="grid">
 
 
-<!-- =========================================
-     GROUP MEMBER FORM
-========================================= -->
+<!-- ==================================================
+     GROUP MEMBER
+================================================== -->
 
 <section class="panel">
 
-    <h2>
-        Add Group Member
-    </h2>
+<h2>
+    Add Group Member
+</h2>
 
-    <p class="panel-description">
-        Add a member to a specific organisation group.
-    </p>
+<p class="panel-description">
+    Add a member to a specific organisation group.
+</p>
 
+<div
+    id="status"
+    class="status"
+></div>
 
-    <div
-        id="status"
-        class="status"
-    ></div>
 
+<form id="groupForm">
 
-    <form id="groupForm">
 
+<div class="field">
 
-        <div class="field">
+<label>
+    Group
+</label>
 
-            <label>
-                Group
-            </label>
+<select
+    id="group"
+    required
+>
 
-            <select
-                id="group"
-                required
-            >
+<option value="">
+    Select a group
+</option>
 
-                <option value="">
-                    Select a group
-                </option>
+<option value="yardimlasma">
+    🤝 Yardımlaşma
+</option>
 
-                <option value="yardimlasma">
-                    🤝 Yardımlaşma
-                </option>
+<option value="din">
+    ☪️ Din
+</option>
 
-                <option value="din">
-                    ☪️ Din
-                </option>
+<option value="kultur">
+    🕌 Kültür
+</option>
 
-                <option value="kultur">
-                    🕌 Kültür
-                </option>
+<option value="spor">
+    ⚽ Spor
+</option>
 
-                <option value="spor">
-                    ⚽ Spor
-                </option>
+<option value="it">
+    🖥️ İT
+</option>
 
-                <option value="it">
-                    🖥️ İT
-                </option>
+<option value="finans">
+    📊 Finans
+</option>
 
-                <option value="finans">
-                    📊 Finans
-                </option>
-
-            </select>
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                Name
-            </label>
-
-            <input
-                id="groupName"
-                type="text"
-                placeholder="e.g. Ronaldo Bhai"
-                required
-            >
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                Position / Job Title
-            </label>
-
-            <input
-                id="groupRole"
-                type="text"
-                placeholder="e.g. Captain"
-                required
-            >
-
-        </div>
-
-
-        <div class="field">
-
-            <label>
-                Duties
-            </label>
-
-            <textarea
-                id="groupDuties"
-                placeholder="What does this person do?"
-            ></textarea>
-
-        </div>
-
-
-        <!-- PHOTO RESTORED -->
-
-        <div class="field">
-
-            <label>
-                Profile Photo
-            </label>
-
-            <div class="photo-box">
-
-                <div
-                    id="groupPreview"
-                    class="preview"
-                >
-                    Photo
-                </div>
-
-                <input
-                    id="groupPhoto"
-                    type="file"
-                    accept="image/*"
-                >
-
-            </div>
-
-        </div>
-
-
-        <button
-            id="groupSave"
-            class="save"
-            type="submit"
-        >
-            + Add Group Member
-        </button>
-
-
-    </form>
-
-</section>
-
-
-<!-- =========================================
-     GROUP MEMBERS
-========================================= -->
-
-<section class="panel">
-
-    <h2>
-        Current Group Members
-    </h2>
-
-    <p class="panel-description">
-        Select a group to see its members.
-    </p>
-
-
-    <select id="viewGroup">
-
-        <option value="">
-            Select a group to view
-        </option>
-
-        <option value="yardimlasma">
-            🤝 Yardımlaşma
-        </option>
-
-        <option value="din">
-            ☪️ Din
-        </option>
-
-        <option value="kultur">
-            🕌 Kültür
-        </option>
-
-        <option value="spor">
-            ⚽ Spor
-        </option>
-
-        <option value="it">
-            🖥️ İT
-        </option>
-
-        <option value="finans">
-            📊 Finans
-        </option>
-
-    </select>
-
-
-    <div
-        id="groupMembers"
-        class="member-list"
-        style="margin-top:18px;"
-    >
-
-        <div class="empty">
-            Select a group to see its members.
-        </div>
-
-    </div>
-
-</section>
-
+</select>
 
 </div>
 
 
-<!-- =========================================
+<div class="field">
+
+<label>
+    Name
+</label>
+
+<input
+    id="groupName"
+    type="text"
+    placeholder="e.g. Ronaldo Bhai"
+    required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Position / Job Title
+</label>
+
+<input
+    id="groupRole"
+    type="text"
+    placeholder="e.g. Captain"
+    required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Duties
+</label>
+
+<textarea
+    id="groupDuties"
+    placeholder="What does this person do?"
+></textarea>
+
+</div>
+
+
+<!-- PHOTO OPTION -->
+
+<div class="field">
+
+<label>
+    Profile Photo
+</label>
+
+<div class="photo-box">
+
+<div
+    id="groupPreview"
+    class="preview"
+>
+    Photo
+</div>
+
+<input
+    id="groupPhoto"
+    type="file"
+    accept="image/*"
+>
+
+</div>
+
+</div>
+
+
+<button
+    id="groupSave"
+    class="save"
+    type="submit"
+>
+    + Add Group Member
+</button>
+
+
+</form>
+
+</section>
+
+
+<!-- ==================================================
+     GROUP MEMBERS
+================================================== -->
+
+<section class="panel">
+
+<h2>
+    Current Group Members
+</h2>
+
+<p class="panel-description">
+    Select a group to see its members.
+</p>
+
+
+<select id="viewGroup">
+
+<option value="">
+    Select a group to view
+</option>
+
+<option value="yardimlasma">
+    🤝 Yardımlaşma
+</option>
+
+<option value="din">
+    ☪️ Din
+</option>
+
+<option value="kultur">
+    🕌 Kültür
+</option>
+
+<option value="spor">
+    ⚽ Spor
+</option>
+
+<option value="it">
+    🖥️ İT
+</option>
+
+<option value="finans">
+    📊 Finans
+</option>
+
+</select>
+
+
+<div
+    id="groupMembers"
+    class="member-list"
+    style="margin-top:18px;"
+>
+
+<div class="empty">
+    Select a group to see its members.
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- ==================================================
      MANAGEMENT
-========================================= -->
+================================================== -->
 
 <section
     class="panel"
     style="margin-top:25px;"
 >
 
-    <h2>
-        Management Profiles
-    </h2>
+<h2>
+    Management Profiles
+</h2>
 
-    <p class="panel-description">
-        Members currently added to the management section.
-    </p>
-
-
-    <div
-        id="managementMembers"
-        class="member-list"
-    >
-
-        <div class="empty">
-            Loading profiles...
-        </div>
-
-    </div>
+<p class="panel-description">
+    Members currently added to the management section.
+</p>
 
 
-    <div
-        id="diagnostic"
-        class="diagnostic"
-    ></div>
+<div
+    id="managementMembers"
+    class="member-list"
+>
+
+<div class="empty">
+    Testing Supabase connection...
+</div>
+
+</div>
+
+
+<div
+    id="diagnostic"
+    class="diagnostic"
+>
+Starting diagnostic...
+</div>
 
 </section>
 
@@ -681,11 +665,6 @@ button {
 
 <script type="module">
 
-
-/* =========================================
-   SUPABASE
-========================================= */
-
 import {
     createClient
 }
@@ -693,13 +672,15 @@ from
 "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
 
+/* ==================================================
+   SUPABASE
+================================================== */
+
 const SUPABASE_URL =
     "https://dufqdjvjszewhhakjibb.supabase.co";
 
-
 const SUPABASE_KEY =
     "sb_publishable_zdE8Z15zobFjWJ0P86B5Qg_55sAbHer";
-
 
 const supabase =
     createClient(
@@ -708,9 +689,9 @@ const supabase =
     );
 
 
-/* =========================================
+/* ==================================================
    ELEMENTS
-========================================= */
+================================================== */
 
 const statusBox =
     document.getElementById("status");
@@ -718,49 +699,81 @@ const statusBox =
 const diagnostic =
     document.getElementById("diagnostic");
 
-const groupForm =
-    document.getElementById("groupForm");
-
-const groupSelect =
-    document.getElementById("group");
-
-const groupName =
-    document.getElementById("groupName");
-
-const groupRole =
-    document.getElementById("groupRole");
-
-const groupDuties =
-    document.getElementById("groupDuties");
-
-const groupPhoto =
-    document.getElementById("groupPhoto");
-
-const groupPreview =
-    document.getElementById("groupPreview");
-
-const groupSave =
-    document.getElementById("groupSave");
-
-const viewGroup =
-    document.getElementById("viewGroup");
-
-const groupMembers =
-    document.getElementById("groupMembers");
-
 const managementMembers =
     document.getElementById(
         "managementMembers"
     );
 
+const groupMembers =
+    document.getElementById(
+        "groupMembers"
+    );
 
-let selectedGroupPhoto =
+const groupForm =
+    document.getElementById(
+        "groupForm"
+    );
+
+const group =
+    document.getElementById(
+        "group"
+    );
+
+const groupName =
+    document.getElementById(
+        "groupName"
+    );
+
+const groupRole =
+    document.getElementById(
+        "groupRole"
+    );
+
+const groupDuties =
+    document.getElementById(
+        "groupDuties"
+    );
+
+const groupPhoto =
+    document.getElementById(
+        "groupPhoto"
+    );
+
+const groupPreview =
+    document.getElementById(
+        "groupPreview"
+    );
+
+const groupSave =
+    document.getElementById(
+        "groupSave"
+    );
+
+const viewGroup =
+    document.getElementById(
+        "viewGroup"
+    );
+
+
+let selectedPhoto =
     null;
 
 
-/* =========================================
-   STATUS
-========================================= */
+/* ==================================================
+   HELPERS
+================================================== */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
 
 function showStatus(
     message,
@@ -776,57 +789,204 @@ function showStatus(
 }
 
 
-/* =========================================
-   DIAGNOSTIC
-========================================= */
+/* ==================================================
+   DIAGNOSTIC TEST
+================================================== */
 
-function showDiagnostic(
-    title,
-    error
-) {
+async function testManagement() {
 
-    const message =
-        error?.message ||
-        String(error);
+    managementMembers.innerHTML = `
 
+        <div class="empty">
+            Testing management connection...
+        </div>
+
+    `;
 
     diagnostic.textContent =
-        title +
-        "\n\n" +
-        message;
+        "Running management SELECT test...";
 
 
-    diagnostic.classList.add(
-        "show"
-    );
+    try {
+
+        const result =
+            await supabase
+                .from("management")
+                .select("*");
+
+
+        console.log(
+            "MANAGEMENT TEST:",
+            result
+        );
+
+
+        if (result.error) {
+
+            managementMembers.innerHTML = `
+
+                <div class="empty">
+
+                    <strong>
+                        Management SELECT failed
+                    </strong>
+
+                    <br><br>
+
+                    ${escapeHTML(
+                        result.error.message
+                    )}
+
+                </div>
+
+            `;
+
+            diagnostic.textContent =
+                JSON.stringify(
+                    result,
+                    null,
+                    2
+                );
+
+            return;
+
+        }
+
+
+        const data =
+            result.data || [];
+
+
+        diagnostic.textContent =
+            "MANAGEMENT SELECT SUCCESS\n\n" +
+            JSON.stringify(
+                result,
+                null,
+                2
+            );
+
+
+        if (data.length === 0) {
+
+            managementMembers.innerHTML = `
+
+                <div class="empty">
+                    Supabase connected successfully,
+                    but the management table is empty.
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        managementMembers.innerHTML =
+            data.map(
+                member => `
+
+<div class="member">
+
+    <div class="avatar">
+
+        ${
+            member.photo_url
+
+            ?
+
+            `<img
+                src="${escapeHTML(
+                    member.photo_url
+                )}"
+                alt=""
+            >`
+
+            :
+
+            "👤"
+        }
+
+    </div>
+
+    <div class="info">
+
+        <strong>
+            ${escapeHTML(
+                member.name
+            )}
+        </strong>
+
+        <span>
+            ${escapeHTML(
+                member.role
+            )}
+        </span>
+
+        <p>
+            ID:
+            ${escapeHTML(
+                member.id
+            )}
+            <br>
+            ${escapeHTML(
+                member.description || ""
+            )}
+        </p>
+
+    </div>
+
+</div>
+
+                `
+            )
+            .join("");
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "MANAGEMENT TEST ERROR:",
+            error
+        );
+
+
+        managementMembers.innerHTML = `
+
+            <div class="empty">
+
+                <strong>
+                    Management connection failed
+                </strong>
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message ||
+                    String(error)
+                )}
+
+            </div>
+
+        `;
+
+
+        diagnostic.textContent =
+            JSON.stringify(
+                error,
+                Object.getOwnPropertyNames(error),
+                2
+            );
+
+    }
 
 }
 
 
-/* =========================================
-   ESCAPE HTML
-========================================= */
-
-function escapeHTML(value) {
-
-    return String(value ?? "")
-
-        .replaceAll("&","&amp;")
-
-        .replaceAll("<","&lt;")
-
-        .replaceAll(">","&gt;")
-
-        .replaceAll('"',"&quot;")
-
-        .replaceAll("'","&#039;");
-
-}
-
-
-/* =========================================
-   GROUP PHOTO PREVIEW
-========================================= */
+/* ==================================================
+   PHOTO PREVIEW
+================================================== */
 
 groupPhoto.addEventListener(
     "change",
@@ -838,7 +998,7 @@ groupPhoto.addEventListener(
 
         if (!file) {
 
-            selectedGroupPhoto =
+            selectedPhoto =
                 null;
 
             groupPreview.textContent =
@@ -849,7 +1009,7 @@ groupPhoto.addEventListener(
         }
 
 
-        selectedGroupPhoto =
+        selectedPhoto =
             file;
 
 
@@ -878,200 +1038,9 @@ groupPhoto.addEventListener(
 );
 
 
-/* =========================================
-   LOAD MANAGEMENT
-========================================= */
-
-async function loadManagement() {
-
-    managementMembers.innerHTML = `
-
-        <div class="empty">
-            Loading profiles...
-        </div>
-
-    `;
-
-
-    try {
-
-        const result =
-            await supabase
-
-                .from("management")
-
-                .select("*")
-
-                .order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
-                );
-
-
-        console.log(
-            "MANAGEMENT RESULT:",
-            result
-        );
-
-
-        if (result.error) {
-
-            throw result.error;
-
-        }
-
-
-        const data =
-            result.data || [];
-
-
-        if (data.length === 0) {
-
-            managementMembers.innerHTML = `
-
-                <div class="empty">
-                    No management profiles yet.
-                </div>
-
-            `;
-
-            return;
-
-        }
-
-
-        managementMembers.innerHTML =
-            data.map(
-                member => `
-
-                    <div class="member">
-
-                        <div class="avatar">
-
-                            ${
-                                member.photo_url
-
-                                ?
-
-                                `<img
-                                    src="${escapeHTML(
-                                        member.photo_url
-                                    )}"
-                                    alt=""
-                                >`
-
-                                :
-
-                                "👤"
-                            }
-
-                        </div>
-
-
-                        <div class="info">
-
-                            <strong>
-                                ${escapeHTML(
-                                    member.name
-                                )}
-                            </strong>
-
-                            <span>
-                                ${escapeHTML(
-                                    member.role
-                                )}
-                            </span>
-
-                            <p>
-                                ${escapeHTML(
-                                    member.description || ""
-                                )}
-                            </p>
-
-                        </div>
-
-
-                        <button
-                            class="delete"
-                            data-management-id="${escapeHTML(
-                                member.id
-                            )}"
-                        >
-                            Delete
-                        </button>
-
-                    </div>
-
-                `
-            ).join("");
-
-
-        managementMembers
-            .querySelectorAll(
-                "[data-management-id]"
-            )
-            .forEach(
-                button => {
-
-                    button.addEventListener(
-                        "click",
-                        () => {
-
-                            deleteManagement(
-                                button.dataset.managementId
-                            );
-
-                        }
-                    );
-
-                }
-            );
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "MANAGEMENT ERROR:",
-            error
-        );
-
-
-        managementMembers.innerHTML = `
-
-            <div class="empty">
-
-                <strong>
-                    Could not load management profiles.
-                </strong>
-
-                <br><br>
-
-                ${escapeHTML(
-                    error.message ||
-                    String(error)
-                )}
-
-            </div>
-
-        `;
-
-
-        showDiagnostic(
-            "MANAGEMENT READ ERROR:",
-            error
-        );
-
-    }
-
-}
-
-
-/* =========================================
+/* ==================================================
    LOAD GROUP MEMBERS
-========================================= */
+================================================== */
 
 async function loadGroupMembers(
     groupId
@@ -1105,21 +1074,11 @@ async function loadGroupMembers(
 
         const result =
             await supabase
-
                 .from("group_members")
-
                 .select("*")
-
                 .eq(
                     "group_id",
                     groupId
-                )
-
-                .order(
-                    "created_at",
-                    {
-                        ascending: false
-                    }
                 );
 
 
@@ -1159,42 +1118,202 @@ async function loadGroupMembers(
             data.map(
                 member => `
 
-                    <div class="member">
+<div class="member">
 
-                        <div class="avatar">
+    <div class="avatar">
 
-                            ${
-                                member.photo_url
+        ${
+            member.photo_url
 
-                                ?
+            ?
 
-                                `<img
-                                    src="${escapeHTML(
-                                        member.photo_url
-                                    )}"
-                                    alt=""
-                                >`
+            `<img
+                src="${escapeHTML(
+                    member.photo_url
+                )}"
+                alt=""
+            >`
 
-                                :
+            :
 
-                                "👤"
+            "👤"
+        }
+
+    </div>
+
+    <div class="info">
+
+        <strong>
+            ${escapeHTML(
+                member.name
+            )}
+        </strong>
+
+        <span>
+            ${escapeHTML(
+                member.role
+            )}
+        </span>
+
+        <p>
+            ID:
+            ${escapeHTML(
+                member.id
+            )}
+            <br>
+            ${escapeHTML(
+                member.duties || ""
+            )}
+        </p>
+
+    </div>
+
+</div>
+
+                `
+            )
+            .join("");
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "GROUP MEMBERS ERROR:",
+            error
+        );
+
+
+        groupMembers.innerHTML = `
+
+            <div class="empty">
+
+                <strong>
+                    Group member loading failed
+                </strong>
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message ||
+                    String(error)
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ==================================================
+   GROUP SELECT
+================================================== */
+
+viewGroup.addEventListener(
+    "change",
+    () => {
+
+        loadGroupMembers(
+            viewGroup.value
+        );
+
+    }
+);
+
+
+/* ==================================================
+   ADD GROUP MEMBER
+================================================== */
+
+groupForm.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+
+        groupSave.disabled =
+            true;
+
+        groupSave.textContent =
+            "Saving...";
+
+
+        try {
+
+            const groupId =
+                group.value;
+
+            const name =
+                groupName.value.trim();
+
+            const role =
+                groupRole.value.trim();
+
+            const duties =
+                groupDuties.value.trim();
+
+
+            let photoURL =
+                null;
+
+
+            /* PHOTO */
+
+            if (selectedPhoto) {
+
+                showStatus(
+                    "Uploading photo..."
+                );
+
+
+                const extension =
+                    selectedPhoto.name
+                        .split(".")
+                        .pop()
+                        .toLowerCase();
+
+
+                const fileName =
+                    crypto.randomUUID()
+                    + "."
+                    + extension;
+
+
+                const upload =
+                    await supabase
+                        .storage
+                        .from(
+                            "management-photos"
+                        )
+                        .upload(
+                            fileName,
+                            selectedPhoto,
+                            {
+                                cacheControl:
+                                    "3600",
+
+                                upsert:
+                                    false
                             }
+                        );
 
-                        </div>
+
+                if (upload.error) {
+
+                    throw upload.error;
+
+                }
 
 
-                        <div class="info">
-
-                            <strong>
-                                ${escapeHTML(
-                                    member.name
-                                )}
-                            </strong>
-
-                            <span>
-                                ${escapeHTML(
-                                    member.role
-                                )}
-                            </span>
-
-           
+                photoURL =
+                    supabase
+                        .storage
+                        .from(
+                            "management-photos"
+                        )
+                        .getPublicUrl(
+                            fi
