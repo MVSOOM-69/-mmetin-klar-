@@ -1830,6 +1830,50 @@ footer {
         display: block;
 
         opacity: 1;
+        @media (max-width: 700px) {
+
+    .header {
+        position: sticky;
+        z-index: 9999;
+    }
+
+    .nav {
+        position: relative;
+        z-index: 10000;
+    }
+
+    .menu-button {
+        position: relative;
+        z-index: 10002;
+        background: white;
+        opacity: 1;
+    }
+
+    #navigation {
+        position: absolute;
+        z-index: 10001;
+        background: var(--background);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    #navigation:not(.open) {
+        display: none;
+    }
+
+    #navigation.open {
+        display: flex;
+    }
+
+    #navigation a {
+        position: relative;
+        z-index: 10002;
+        background: transparent;
+        pointer-events: auto;
+    }
+
+        }
 
         visibility: visible;
     }
