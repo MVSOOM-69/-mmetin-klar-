@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ümmetin Işıkları — Admin</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #fffdf8;
+    color: #202020;
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    background: rgba(255,253,248,.96);
+    border-bottom: 1px solid #e5dfd3;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #111;
+    text-decoration: none;
+    font-weight: 900;
+}
+
+.brand-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #e5dfd3;
+}
+
+.brand-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.back {
+    text-decoration: none;
+    color: #202020;
+    background: white;
+    border: 1px solid #e5dfd3;
+    padding: 9px 15px;
+    border-radius: 12px;
+    font-size: .8rem;
+    font-weight: 800;
+}
+
+main {
+    width: min(1100px, calc(100% - 30px));
+    margin: auto;
+    padding: 55px 0 80px;
+}
+
+.title small {
+    color: #078b75;
+    font-size: .7rem;
+    font-weight: 900;
+    letter-spacing: .16em;
+}
+
+.title h1 {
+    margin-top: 8px;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 1.05;
+}
+
+.title p {
+    color: #707070;
+    margin-top: 12px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #e5dfd3;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.07);
+}
+
+.panel h2 {
+    font-size: 1.3rem;
+}
+
+.panel-description {
+    color: #707070;
+    font-size: .82rem;
+    margin: 5px 0 22px;
+}
+
+label {
+    display: block;
+    font-size: .76rem;
+    font-weight: 850;
+    margin-bottom: 7px;
+}
+
+.field {
+    margin-bottom: 17px;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e5dfd3;
+    border-radius: 12px;
+    background: #fffdf8;
+    color: #202020;
+    font: inherit;
+    outline: none;
+}
+
+textarea {
+    min-height: 105px;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #078b75;
+}
+
+.photo-box {
+    padding: 14px;
+    border: 1px dashed #d2c8b7;
+    border-radius: 16px;
+    background: #f5f0e6;
+}
+
+.preview {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #e5dfd3;
+    display: grid;
+    place-items: center;
+    color: #707070;
+    font-size: .7rem;
+    margin-bottom: 12px;
+}
+
+.preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+button {
+    font: inherit;
+}
+
+.save {
+    width: 100%;
+    min-height: 50px;
+    border: 0;
+    border-radius: 14px;
+    background: #111;
+    color: white;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.save:hover {
+    background: #078b75;
+}
+
+.save:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.status {
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    font-size: .8rem;
+    font-weight: 700;
+    display: none;
+}
+
+.status.show {
+    display: block;
+}
+
+.success {
+    background: #e6f6f2;
+    color: #056b5a;
+}
+
+.error {
+    background: #fff0ed;
+    color: #a23826;
+}
+
+.member-list {
+    display: grid;
+    gap: 12px;
+}
+
+.member {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid #e5dfd3;
+    border-radius: 17px;
+    background: #fffdf8;
+}
+
+.avatar {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg,#078b75,#dfb42c);
+    display: grid;
+    place-items: center;
+    color: white;
+    font-weight: 900;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info {
+    min-width: 0;
+    flex: 1;
+}
+
+.info strong {
+    display: block;
+    font-size: .95rem;
+}
+
+.info span {
+    display: block;
+    color: #078b75;
+    font-size: .7rem;
+    font-weight: 800;
+}
+
+.info p {
+    color: #707070;
+    font-size: .76rem;
+    margin-top: 3px;
+}
+
+.delete {
+    flex-shrink: 0;
+    border: 1px solid #ead1cb;
+    background: white;
+    color: #a23826;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: .7rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.empty {
+    text-align: center;
+    padding: 30px 15px;
+    color: #707070;
+    border: 1px dashed #d2c8b7;
+    border-radius: 17px;
+    font-size: .84rem;
+}
+
+@media(max-width:750px) {
+    header {
+        padding: 0 15px;
+    }
+
+    .brand span {
+        display: none;
+    }
+
+    main {
+        padding-top: 35px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        padding: 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<a href="index.html" class="brand">
+
+    <div class="brand-logo">
+        <img src="images/logo.png" alt="Ümmetin Işıkları">
+    </div>
+
+    <span>ÜMMETİN IŞIKLARI</span>
+
+</a>
+
+<a href="index.html" class="back">
+    ← Back to website
+</a>
+
+</header>
+
+
+<main>
+
+<div class="title">
+
+    <small>ADMINISTRATION</small>
+
+    <h1>Control Center</h1>
+
+    <p>
+        Manage the people of Ümmetin Işıkları.
+    </p>
+
+</div>
+
+
+<div class="grid">
+
+
+<section class="panel">
+
+    <h2>Add Management Member</h2>
+
+    <p class="panel-description">
+        Add a person's name, position, description and photo.
+    </p>
+
+    <div id="status" class="status"></div>
+
+
+    <form id="form">
+
+        <div class="field">
+
+            <label>Name</label>
+
+            <input
+                id="name"
+                type="text"
+                placeholder="e.g. Ronaldo Bhai"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Position / Job Title</label>
+
+            <input
+                id="role"
+                type="text"
+                placeholder="e.g. Head"
+                required
+            >
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Description</label>
+
+            <textarea
+                id="description"
+                placeholder="Short description..."
+            ></textarea>
+
+        </div>
+
+
+        <div class="field">
+
+            <label>Profile Photo</label>
+
+            <div class="photo-box">
+
+                <div id="preview" class="preview">
+                    Photo
+                </div>
+
+                <input
+                    id="photo"
+                    type="file"
+                    accept="image/*"
+                >
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="save"
+            class="save"
+            type="submit"
+        >
+            + Add Member
+        </button>
+
+    </form>
+
+</section>
+
+
+<section class="panel">
+
+    <h2>Management Profiles</h2>
+
+    <p class="panel-description">
+        Members currently added to the management section.
+    </p>
+
+    <div id="members" class="member-list">
+
+        <div class="empty">
+            Connecting to Supabase...
+        </div>
+
+    </div>
+
+</section>
+
+
+</div>
+
+</main>
+
+
+<script type="module">
+
+import {
+    createClient
+}
+from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+
+/* ==============================================
+   SUPABASE
+============================================== */
+
+const SUPABASE_URL =
+    "https://dufqdjvjszewhhakjibb.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_zdE8Z15zobFjWJ0P86B5Qg_55sAbHer";
+
+
+const supabase =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* ==============================================
+   ELEMENTS
+============================================== */
+
+const form =
+    document.getElementById("form");
+
+const nameInput =
+    document.getElementById("name");
+
+const roleInput =
+    document.getElementById("role");
+
+const descriptionInput =
+    document.getElementById("description");
+
+const photoInput =
+    document.getElementById("photo");
+
+const preview =
+    document.getElementById("preview");
+
+const members =
+    document.getElementById("members");
+
+const status =
+    document.getElementById("status");
+
+const save =
+    document.getElementById("save");
+
+
+let selectedPhoto = null;
+
+
+/* ==============================================
+   STATUS
+============================================== */
+
+function showStatus(
+    message,
+    type = "success"
+) {
+
+    status.textContent = message;
+
+    status.className =
+        "status show " + type;
+
+}
+
+
+/* ==============================================
+   PHOTO PREVIEW
+============================================== */
+
+photoInput.addEventListener(
+    "change",
+    () => {
+
+        const file =
+            photoInput.files[0];
+
+        if (!file) {
+
+            selectedPhoto = null;
+
+            preview.textContent =
+                "Photo";
+
+            return;
+
+        }
+
+        selectedPhoto = file;
+
+        const reader =
+            new FileReader();
+
+        reader.onload =
+            event => {
+
+                preview.innerHTML =
+                    `
+                    <img
+                        src="${event.target.result}"
+                        alt="Preview"
+                    >
+                    `;
+
+            };
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+/* ==============================================
+   LOAD MEMBERS
+============================================== */
+
+async function loadMembers() {
+
+    members.innerHTML =
+        `
+        <div class="empty">
+            Loading profiles...
+        </div>
+        `;
+
+
+    try {
+
+        const result =
+            await supabase
+                .from("management")
+                .select("*")
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        console.log(
+            "Supabase response:",
+            result
+        );
+
+
+        if (result.error) {
+
+            throw result.error;
+
+        }
+
+
+        members.innerHTML = "";
+
+
+        if (!result.data || result.data.length === 0) {
+
+            members.innerHTML =
+                `
+                <div class="empty">
+                    No management profiles yet.
+                </div>
+                `;
+
+            return;
+
+        }
+
+
+        result.data.forEach(
+            member => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className =
+                    "member";
+
+
+                const avatar =
+                    member.photo_url
+
+                    ?
+
+                    `
+                    <img
+                        src="${member.photo_url}"
+                        alt="${member.name}"
+                    >
+                    `
+
+                    :
+
+                    "👤";
+
+
+                card.innerHTML =
+                    `
+                    <div class="avatar">
+                        ${avatar}
+                    </div>
+
+                    <div class="info">
+
+                        <strong>
+                            ${escapeHTML(member.name)}
+                        </strong>
+
+                        <span>
+                            ${escapeHTML(member.role)}
+                        </span>
+
+                        <p>
+                            ${escapeHTML(
+                                member.description || ""
+                            )}
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="delete"
+                        data-id="${member.id}"
+                    >
+                        Delete
+                    </button>
+                    `;
+
+
+                card
+                    .querySelector(".delete")
+                    .addEventListener(
+                        "click",
+                        () => deleteMember(member.id)
+                    );
+
+
+                members.appendChild(card);
+
+            }
+        );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "SUPABASE ERROR:",
+            error
+        );
+
+
+        members.innerHTML =
+            `
+            <div class="empty">
+
+                <strong>
+                    Could not load profiles.
+                </strong>
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message ||
+                    String(error)
+                )}
+
+            </div>
+            `;
+
+
+        showStatus(
+            "Supabase error: " +
+            (
+                error.message ||
+                String(error)
+            ),
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ==============================================
+   ADD MEMBER
+============================================== */
+
+form.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+        save.disabled = true;
+
+        save.textContent =
+            "Saving...";
+
+
+        try {
+
+            let photoURL = null;
+
+
+            /* Upload image */
+
+            if (selectedPhoto) {
+
+                showStatus(
+                    "Uploading photo..."
+                );
+
+
+                const extension =
+                    selectedPhoto.name
+                        .split(".")
+                        .pop()
+                        .toLowerCase();
+
+
+                const fileName =
+                    crypto.randomUUID()
+                    + "."
+                    + extension;
+
+
+                const upload =
+                    await supabase
+                        .storage
+                        .from("management-photos")
+                        .upload(
+                            fileName,
+                            selectedPhoto,
+                            {
+                                cacheControl: "3600",
+                                upsert: false
+                            }
+                        );
+
+
+                if (upload.error) {
+
+                    throw upload.error;
+
+                }
+
+
+                const publicURL =
+                    supabase
+                        .storage
+                        .from("management-photos")
+                        .getPublicUrl(
+                            fileName
+                        );
+
+
+                photoURL =
+                    publicURL.data.publicUrl;
+
+            }
+
+
+            /* Insert database row */
+
+            showStatus(
+                "Saving profile..."
+            );
+
+
+            const insert =
+                await supabase
+                    .from("management")
+                    .insert({
+
+                        name:
+                            nameInput.value.trim(),
+
+                        role:
+                            roleInput.value.trim(),
+
+                        description:
+                            descriptionInput.value.trim(),
+
+                        photo_url:
+                            photoURL
+
+                    });
+
+
+            if (insert.error) {
+
+                throw insert.error;
+
+            }
+
+
+            form.reset();
+
+            selectedPhoto = null;
+
+            preview.textContent =
+                "Photo";
+
+
+            showStatus(
+                "Profile added successfully!"
+            );
+
+
+            await loadMembers();
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "ADD MEMBER ERROR:",
+                error
+            );
+
+
+            showStatus(
+                "Error: " +
+                (
+                    error.message ||
+                    String(error)
+                ),
+                "error"
+            );
+
+        }
+
+        finally {
+
+            save.disabled = false;
+
+            save.textContent =
+                "+ Add Member";
+
+        }
+
+    }
+);
+
+
+/* ==============================================
+   DELETE
+============================================== */
+
+async function deleteMember(id) {
+
+    if (
+        !confirm(
+            "Delete this management profile?"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const result =
+            await supabase
+                .from("management")
+                .delete()
+                .eq(
+                    "id",
+                    id
+                );
+
+
+        if (result.error) {
+
+            throw result.error;
+
+        }
+
+
+        showStatus(
+            "Profile deleted."
+        );
+
+
+        await loadMembers();
+
+    }
+
+    catch (error) {
+
+        showStatus(
+            "Delete error: " +
+            error.message,
+            "error"
+        );
+
+    }
+
+}
+
+
+/* ==============================================
+   SECURITY — ESCAPE HTML
+============================================== */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* ==============================================
+   START
+============================================== */
+
+loadMembers();
+
+</script>
+
+</body>
+</html>
