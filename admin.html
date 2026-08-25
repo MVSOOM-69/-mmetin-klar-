@@ -19,8 +19,8 @@
 body {
     background: #fffdf8;
     color: #202020;
-    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont,
-        "Segoe UI", sans-serif;
+    font-family: Inter, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
     line-height: 1.6;
 }
 
@@ -135,21 +135,13 @@ label {
 input,
 textarea,
 select {
-
     width: 100%;
-
     padding: 12px 14px;
-
     border: 1px solid #e5dfd3;
-
     border-radius: 12px;
-
     background: #fffdf8;
-
     color: #202020;
-
     font: inherit;
-
     outline: none;
 }
 
@@ -315,14 +307,24 @@ button {
     border: 1px dashed #d2c8b7;
     border-radius: 17px;
     font-size: .84rem;
+    word-break: break-word;
 }
 
-.group-selector {
-    margin-bottom: 20px;
+.diagnostic {
+    margin-top: 25px;
+    padding: 18px;
+    background: #111;
+    color: #fff;
+    border-radius: 18px;
+    display: none;
+    font-family: monospace;
+    font-size: .75rem;
+    white-space: pre-wrap;
+    word-break: break-word;
 }
 
-.group-selector select {
-    cursor: pointer;
+.diagnostic.show {
+    display: block;
 }
 
 @media(max-width:750px) {
@@ -415,7 +417,7 @@ button {
 
 
 <!-- =========================================
-     ADD GROUP MEMBER
+     GROUP MEMBER FORM
 ========================================= -->
 
 <section class="panel">
@@ -528,6 +530,34 @@ button {
         </div>
 
 
+        <!-- PHOTO RESTORED -->
+
+        <div class="field">
+
+            <label>
+                Profile Photo
+            </label>
+
+            <div class="photo-box">
+
+                <div
+                    id="groupPreview"
+                    class="preview"
+                >
+                    Photo
+                </div>
+
+                <input
+                    id="groupPhoto"
+                    type="file"
+                    accept="image/*"
+                >
+
+            </div>
+
+        </div>
+
+
         <button
             id="groupSave"
             class="save"
@@ -557,46 +587,43 @@ button {
     </p>
 
 
-    <div class="group-selector">
+    <select id="viewGroup">
 
-        <select id="viewGroup">
+        <option value="">
+            Select a group to view
+        </option>
 
-            <option value="">
-                Select a group to view
-            </option>
+        <option value="yardimlasma">
+            🤝 Yardımlaşma
+        </option>
 
-            <option value="yardimlasma">
-                🤝 Yardımlaşma
-            </option>
+        <option value="din">
+            ☪️ Din
+        </option>
 
-            <option value="din">
-                ☪️ Din
-            </option>
+        <option value="kultur">
+            🕌 Kültür
+        </option>
 
-            <option value="kultur">
-                🕌 Kültür
-            </option>
+        <option value="spor">
+            ⚽ Spor
+        </option>
 
-            <option value="spor">
-                ⚽ Spor
-            </option>
+        <option value="it">
+            🖥️ İT
+        </option>
 
-            <option value="it">
-                🖥️ İT
-            </option>
+        <option value="finans">
+            📊 Finans
+        </option>
 
-            <option value="finans">
-                📊 Finans
-            </option>
-
-        </select>
-
-    </div>
+    </select>
 
 
     <div
         id="groupMembers"
         class="member-list"
+        style="margin-top:18px;"
     >
 
         <div class="empty">
@@ -640,6 +667,12 @@ button {
 
     </div>
 
+
+    <div
+        id="diagnostic"
+        class="diagnostic"
+    ></div>
+
 </section>
 
 
@@ -682,6 +715,9 @@ const supabase =
 const statusBox =
     document.getElementById("status");
 
+const diagnostic =
+    document.getElementById("diagnostic");
+
 const groupForm =
     document.getElementById("groupForm");
 
@@ -696,6 +732,12 @@ const groupRole =
 
 const groupDuties =
     document.getElementById("groupDuties");
+
+const groupPhoto =
+    document.getElementById("groupPhoto");
+
+const groupPreview =
+    document.getElementById("groupPreview");
 
 const groupSave =
     document.getElementById("groupSave");
@@ -712,6 +754,10 @@ const managementMembers =
     );
 
 
+let selectedGroupPhoto =
+    null;
+
+
 /* =========================================
    STATUS
 ========================================= */
@@ -726,6 +772,33 @@ function showStatus(
 
     statusBox.className =
         "status show " + type;
+
+}
+
+
+/* =========================================
+   DIAGNOSTIC
+========================================= */
+
+function showDiagnostic(
+    title,
+    error
+) {
+
+    const message =
+        error?.message ||
+        String(error);
+
+
+    diagnostic.textContent =
+        title +
+        "\n\n" +
+        message;
+
+
+    diagnostic.classList.add(
+        "show"
+    );
 
 }
 
@@ -749,6 +822,60 @@ function escapeHTML(value) {
         .replaceAll("'","&#039;");
 
 }
+
+
+/* =========================================
+   GROUP PHOTO PREVIEW
+========================================= */
+
+groupPhoto.addEventListener(
+    "change",
+    () => {
+
+        const file =
+            groupPhoto.files[0];
+
+
+        if (!file) {
+
+            selectedGroupPhoto =
+                null;
+
+            groupPreview.textContent =
+                "Photo";
+
+            return;
+
+        }
+
+
+        selectedGroupPhoto =
+            file;
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            event => {
+
+                groupPreview.innerHTML = `
+
+                    <img
+                        src="${event.target.result}"
+                        alt="Preview"
+                    >
+
+                `;
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    }
+);
 
 
 /* =========================================
@@ -931,6 +1058,12 @@ async function loadManagement() {
 
         `;
 
+
+        showDiagnostic(
+            "MANAGEMENT READ ERROR:",
+            error
+        );
+
     }
 
 }
@@ -1012,9 +1145,7 @@ async function loadGroupMembers(
             groupMembers.innerHTML = `
 
                 <div class="empty">
-
                     No members in this group yet.
-
                 </div>
 
             `;
@@ -1031,8 +1162,26 @@ async function loadGroupMembers(
                     <div class="member">
 
                         <div class="avatar">
-                            👤
+
+                            ${
+                                member.photo_url
+
+                                ?
+
+                                `<img
+                                    src="${escapeHTML(
+                                        member.photo_url
+                                    )}"
+                                    alt=""
+                                >`
+
+                                :
+
+                                "👤"
+                            }
+
                         </div>
+
 
                         <div class="info">
 
@@ -1048,163 +1197,4 @@ async function loadGroupMembers(
                                 )}
                             </span>
 
-                            <p>
-                                ${escapeHTML(
-                                    member.duties || ""
-                                )}
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                `
-            ).join("");
-
-    }
-
-    catch (error) {
-
-        console.error(
-            "GROUP MEMBERS ERROR:",
-            error
-        );
-
-
-        groupMembers.innerHTML = `
-
-            <div class="empty">
-
-                <strong>
-                    Could not load group members.
-                </strong>
-
-                <br><br>
-
-                ${escapeHTML(
-                    error.message ||
-                    String(error)
-                )}
-
-            </div>
-
-        `;
-
-    }
-
-}
-
-
-/* =========================================
-   ADD GROUP MEMBER
-========================================= */
-
-groupForm.addEventListener(
-    "submit",
-    async event => {
-
-        event.preventDefault();
-
-
-        groupSave.disabled =
-            true;
-
-
-        groupSave.textContent =
-            "Saving...";
-
-
-        showStatus(
-            "Saving group member..."
-        );
-
-
-        try {
-
-            const selectedGroup =
-                groupSelect.value;
-
-
-            const name =
-                groupName.value.trim();
-
-
-            const role =
-                groupRole.value.trim();
-
-
-            const duties =
-                groupDuties.value.trim();
-
-
-            const result =
-                await supabase
-
-                    .from("group_members")
-
-                    .insert({
-
-                        group_id:
-                            selectedGroup,
-
-                        name:
-                            name,
-
-                        role:
-                            role,
-
-                        duties:
-                            duties
-
-                    });
-
-
-            console.log(
-                "INSERT GROUP MEMBER:",
-                result
-            );
-
-
-            if (result.error) {
-
-                throw result.error;
-
-            }
-
-
-            showStatus(
-                "Group member added successfully!"
-            );
-
-
-            groupForm.reset();
-
-
-            await loadGroupMembers(
-                selectedGroup
-            );
-
-        }
-
-        catch (error) {
-
-            console.error(
-                "ADD GROUP MEMBER ERROR:",
-                error
-            );
-
-
-            showStatus(
-                "Error: " +
-                (
-                    error.message ||
-                    String(error)
-                ),
-                "error"
-            );
-
-        }
-
-        finally {
-
-        
+           
