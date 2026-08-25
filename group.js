@@ -1,95 +1,121 @@
+/* =========================================
+   ÜMMETİN IŞIKLARI
+   GROUP DATA
+========================================= */
+
 const groupData = {
 
-
     yardimlasma: {
-
         title: "Yardımlaşma",
-
         icon: "🤝",
-
         description:
             "Yardımlaşma grubunun gerçek amacı ve yaptığı çalışmalar daha sonra burada açıklanacak.",
-
         mission:
             "Gerçek görev bilgisi daha sonra eklenecek.",
-
         work:
             "Gerçek çalışma bilgileri daha sonra eklenecek.",
-
         events:
-            "Grup etkinlikleri daha sonra eklenecek.",
-
-
-        team: [
-
-            {
-                name: "Ekip Üyesi",
-                role: "GÖREV",
-                image: "",
-                duties:
-                    "Görev bilgisi daha sonra eklenecek."
-            },
-
-            {
-                name: "Ekip Üyesi",
-                role: "GÖREV",
-                image: "",
-                duties:
-                    "Görev bilgisi daha sonra eklenecek."
-            }
-
-        ]
-
+            "Grup etkinlikleri daha sonra eklenecek."
     },
 
-
-    group2: {
-
-        title: "Yeni Grup",
-
-        icon: "✦",
-
+    din: {
+        title: "Din",
+        icon: "☪️",
         description:
-            "Bu grubun gerçek bilgileri daha sonra eklenecek.",
-
+            "Din grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
         mission:
-            "Bilgi daha sonra eklenecek.",
-
+            "Görev bilgisi daha sonra eklenecek.",
         work:
-            "Bilgi daha sonra eklenecek.",
-
+            "Çalışma bilgisi daha sonra eklenecek.",
         events:
-            "Bilgi daha sonra eklenecek.",
-
-        team: []
-
+            "Etkinlik bilgisi daha sonra eklenecek."
     },
 
-
-    group3: {
-
-        title: "Yeni Grup",
-
-        icon: "📄",
-
+    kultur: {
+        title: "Kültür",
+        icon: "🕌",
         description:
-            "Bu grubun gerçek bilgileri daha sonra eklenecek.",
-
+            "Kültür grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
         mission:
-            "Bilgi daha sonra eklenecek.",
-
+            "Görev bilgisi daha sonra eklenecek.",
         work:
-            "Bilgi daha sonra eklenecek.",
-
+            "Çalışma bilgisi daha sonra eklenecek.",
         events:
-            "Bilgi daha sonra eklenecek.",
+            "Etkinlik bilgisi daha sonra eklenecek."
+    },
 
-        team: []
+    spor: {
+        title: "Spor",
+        icon: "⚽",
+        description:
+            "Spor grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
+        mission:
+            "Spor grubunun görev bilgisi daha sonra eklenecek.",
+        work:
+            "Spor grubunun çalışmaları daha sonra eklenecek.",
+        events:
+            "Spor etkinlikleri daha sonra eklenecek."
+    },
 
+    it: {
+        title: "İT",
+        icon: "🖥️",
+        description:
+            "İT grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
+        mission:
+            "Görev bilgisi daha sonra eklenecek.",
+        work:
+            "Çalışma bilgisi daha sonra eklenecek.",
+        events:
+            "Etkinlik bilgisi daha sonra eklenecek."
+    },
+
+    finans: {
+        title: "Finans",
+        icon: "📊",
+        description:
+            "Finans grubunun çalışmaları ve faaliyetleri hakkında bilgi.",
+        mission:
+            "Görev bilgisi daha sonra eklenecek.",
+        work:
+            "Çalışma bilgisi daha sonra eklenecek.",
+        events:
+            "Etkinlik bilgisi daha sonra eklenecek."
     }
 
 };
 
+
+/* =========================================
+   SUPABASE
+========================================= */
+
+const SUPABASE_URL =
+    "https://dufqdjvjszewhhakjibb.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_zdE8Z15zobFjWJ0P86B5Qg_55sAbHer";
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHTML(value) {
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================
+   GET SELECTED GROUP
+========================================= */
 
 const params =
     new URLSearchParams(
@@ -106,6 +132,10 @@ const group =
     groupData[selectedGroup] ||
     groupData.yardimlasma;
 
+
+/* =========================================
+   GROUP INFORMATION
+========================================= */
 
 document.title =
     group.title +
@@ -148,22 +178,28 @@ document.getElementById(
     group.events;
 
 
-/* ORGANISATION TEAM */
+/* =========================================
+   LOAD GROUP MEMBERS
+========================================= */
 
-const teamGrid =
-    document.getElementById(
-        "teamGrid"
-    );
+async function loadGroupMembers() {
 
+    const teamGrid =
+        document.getElementById(
+            "teamGrid"
+        );
 
-if (group.team.length === 0) {
+    if (!teamGrid) {
+        return;
+    }
+
 
     teamGrid.innerHTML = `
 
         <article class="team-card">
 
             <div class="team-photo">
-                Üİ
+                ...
             </div>
 
             <small>
@@ -171,67 +207,224 @@ if (group.team.length === 0) {
             </small>
 
             <h3>
-                Ekip bilgileri yakında
+                Loading...
             </h3>
 
             <p>
-                Gerçek ekip üyeleri daha sonra
-                eklenecek.
+                Ekip üyeleri yükleniyor...
             </p>
 
         </article>
 
     `;
 
-} else {
 
-    teamGrid.innerHTML =
-        group.team
-            .map(member => {
+    try {
 
-                return `
+        const response =
+            await fetch(
+                SUPABASE_URL +
+                "/rest/v1/group_members?group_id=eq." +
+                encodeURIComponent(selectedGroup) +
+                "&select=*",
+                {
+                    method: "GET",
 
-                    <article class="team-card">
+                    headers: {
+                        "apikey":
+                            SUPABASE_KEY,
 
-                        <div class="team-photo">
+                        "Authorization":
+                            "Bearer " +
+                            SUPABASE_KEY,
 
-                            ${
-                                member.image
-
-                                ?
-
-                                `<img
-                                    src="${member.image}"
-                                    alt="${member.name}"
-                                >`
-
-                                :
-
-                                "Üİ"
-                            }
-
-                        </div>
+                        "Content-Type":
+                            "application/json"
+                    }
+                }
+            );
 
 
-                        <small>
-                            ${member.role}
-                        </small>
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(
+                "Supabase HTTP " +
+                response.status +
+                ": " +
+                errorText
+            );
+
+        }
 
 
-                        <h3>
-                            ${member.name}
-                        </h3>
+        const members =
+            await response.json();
 
 
-                        <p>
-                            ${member.duties}
-                        </p>
+        console.log(
+            "Group members:",
+            members
+        );
 
-                    </article>
 
-                `;
+        /* =================================
+           NO MEMBERS
+        ================================= */
 
-            })
-            .join("");
+        if (
+            !Array.isArray(members) ||
+            members.length === 0
+        ) {
+
+            teamGrid.innerHTML = `
+
+                <article class="team-card">
+
+                    <div class="team-photo">
+                        Üİ
+                    </div>
+
+                    <small>
+                        EKİP
+                    </small>
+
+                    <h3>
+                        Ekip bilgileri yakında
+                    </h3>
+
+                    <p>
+                        Gerçek ekip üyeleri daha sonra
+                        eklenecek.
+                    </p>
+
+                </article>
+
+            `;
+
+            return;
+        }
+
+
+        /* =================================
+           DISPLAY MEMBERS
+        ================================= */
+
+        teamGrid.innerHTML =
+            members.map(
+                member => {
+
+                    const name =
+                        member.name ||
+                        "İsimsiz";
+
+                    const role =
+                        member.role ||
+                        "EKİP";
+
+                    const duties =
+                        member.duties ||
+                        "";
+
+                    const image =
+                        member.photo_url ||
+                        "";
+
+
+                    return `
+
+                        <article class="team-card">
+
+                            <div class="team-photo">
+
+                                ${
+                                    image
+
+                                    ?
+
+                                    `
+                                    <img
+                                        src="${escapeHTML(image)}"
+                                        alt="${escapeHTML(name)}"
+                                    >
+                                    `
+
+                                    :
+
+                                    "Üİ"
+                                }
+
+                            </div>
+
+
+                            <small>
+                                ${escapeHTML(role)}
+                            </small>
+
+
+                            <h3>
+                                ${escapeHTML(name)}
+                            </h3>
+
+
+                            <p>
+                                ${escapeHTML(duties)}
+                            </p>
+
+                        </article>
+
+                    `;
+
+                }
+            ).join("");
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "GROUP MEMBERS ERROR:",
+            error
+        );
+
+
+        teamGrid.innerHTML = `
+
+            <article class="team-card">
+
+                <div class="team-photo">
+                    !
+                </div>
+
+                <small>
+                    ERROR
+                </small>
+
+                <h3>
+                    Ekip bilgileri yüklenemedi
+                </h3>
+
+                <p>
+                    ${escapeHTML(
+                        error.message ||
+                        "Unknown error"
+                    )}
+                </p>
+
+            </article>
+
+        `;
+
+    }
 
 }
+
+
+/* =========================================
+   START
+========================================= */
+
+loadGroupMembers();
