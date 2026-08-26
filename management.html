@@ -19,9 +19,6 @@
         href="style.css"
     >
 
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 </head>
 
 
@@ -131,29 +128,37 @@
 </main>
 
 
-<script>
+<script type="module">
 
 /* =========================================
    SUPABASE
-   SAME SETTINGS AS ADMIN.HTML
+   SAME CONFIGURATION AS ADMIN.HTML
 ========================================= */
+
+import {
+    createClient
+}
+from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
 
 const SUPABASE_URL =
     "https://dufqdjvjszewhhakjibb.supabase.co";
+
 
 const SUPABASE_KEY =
     "sb_publishable_zdE8Z15zobFJvWJ0P86B5Qg_55sAbHer";
 
 
 const supabase =
-    window.supabase.createClient(
+    createClient(
         SUPABASE_URL,
         SUPABASE_KEY
     );
 
 
 /* =========================================
-   ESCAPE HTML
+   HTML ESCAPE
 ========================================= */
 
 function escapeHTML(value) {
@@ -180,11 +185,6 @@ async function loadManagement() {
         );
 
 
-    if (!managementPage) {
-        return;
-    }
-
-
     try {
 
         const result =
@@ -199,39 +199,28 @@ async function loadManagement() {
                 );
 
 
-        const data =
-            result.data;
+        if (result.error) {
 
-        const error =
-            result.error;
+            throw result.error;
+
+        }
+
+
+        const data =
+            result.data || [];
 
 
         console.log(
-            "Management data:",
+            "MANAGEMENT DATA:",
             data
         );
-
-
-        if (error) {
-
-            console.error(
-                "Management Supabase error:",
-                error
-            );
-
-            throw error;
-
-        }
 
 
         /* =================================
            NO MEMBERS
         ================================= */
 
-        if (
-            !Array.isArray(data) ||
-            data.length === 0
-        ) {
+        if (data.length === 0) {
 
             managementPage.innerHTML = `
 
@@ -263,7 +252,7 @@ async function loadManagement() {
 
 
         /* =================================
-           REAL MEMBERS
+           DISPLAY REAL MEMBERS
         ================================= */
 
         managementPage.innerHTML =
@@ -313,9 +302,7 @@ async function loadManagement() {
 
                                     :
 
-                                    `
-                                    Üİ
-                                    `
+                                    "Üİ"
                                 }
 
                             </div>
@@ -333,26 +320,20 @@ async function loadManagement() {
 
                             ${
                                 description
-
                                 ?
-
                                 `
                                 <p>
                                     ${escapeHTML(description)}
                                 </p>
                                 `
-
                                 :
-
                                 ""
                             }
 
 
                             ${
                                 id
-
                                 ?
-
                                 `
                                 <p
                                     style="
@@ -365,9 +346,7 @@ async function loadManagement() {
                                     ID: ${escapeHTML(id)}
                                 </p>
                                 `
-
                                 :
-
                                 ""
                             }
 
@@ -410,7 +389,7 @@ async function loadManagement() {
                 <p>
                     ${escapeHTML(
                         error.message ||
-                        "Unknown error"
+                        String(error)
                     )}
                 </p>
 
