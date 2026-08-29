@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ümmetin Işıkları — Admin</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #fffdf8;
+    color: #202020;
+    font-family: Inter, system-ui, -apple-system,
+        BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+}
+
+header {
+    min-height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    background: rgba(255,253,248,.96);
+    border-bottom: 1px solid #e5dfd3;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    color: #111;
+    text-decoration: none;
+    font-weight: 900;
+}
+
+.brand-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #e5dfd3;
+}
+
+.brand-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.back {
+    text-decoration: none;
+    color: #202020;
+    background: white;
+    border: 1px solid #e5dfd3;
+    padding: 9px 15px;
+    border-radius: 12px;
+    font-size: .8rem;
+    font-weight: 800;
+}
+
+main {
+    width: min(1100px, calc(100% - 30px));
+    margin: auto;
+    padding: 55px 0 80px;
+}
+
+.title small {
+    color: #078b75;
+    font-size: .7rem;
+    font-weight: 900;
+    letter-spacing: .16em;
+}
+
+.title h1 {
+    margin-top: 8px;
+    font-size: clamp(2.4rem, 6vw, 4.5rem);
+    line-height: 1.05;
+}
+
+.title p {
+    color: #707070;
+    margin-top: 12px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: .8fr 1.2fr;
+    gap: 25px;
+    margin-top: 35px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #e5dfd3;
+    border-radius: 24px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.07);
+}
+
+.panel h2 {
+    font-size: 1.3rem;
+}
+
+.panel-description {
+    color: #707070;
+    font-size: .82rem;
+    margin: 5px 0 22px;
+}
+
+label {
+    display: block;
+    font-size: .76rem;
+    font-weight: 850;
+    margin-bottom: 7px;
+}
+
+.field {
+    margin-bottom: 17px;
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #e5dfd3;
+    border-radius: 12px;
+    background: #fffdf8;
+    color: #202020;
+    font: inherit;
+    outline: none;
+}
+
+textarea {
+    min-height: 105px;
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #078b75;
+}
+
+.photo-box {
+    padding: 14px;
+    border: 1px dashed #d2c8b7;
+    border-radius: 16px;
+    background: #f5f0e6;
+}
+
+.preview {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: white;
+    border: 1px solid #e5dfd3;
+    display: grid;
+    place-items: center;
+    color: #707070;
+    font-size: .7rem;
+    margin-bottom: 12px;
+}
+
+.preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+button {
+    font: inherit;
+}
+
+.save {
+    width: 100%;
+    min-height: 50px;
+    border: 0;
+    border-radius: 14px;
+    background: #111;
+    color: white;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.save:hover {
+    background: #078b75;
+}
+
+.save:disabled {
+    opacity: .6;
+    cursor: wait;
+}
+
+.status {
+    padding: 12px 14px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    font-size: .8rem;
+    font-weight: 700;
+    display: none;
+}
+
+.status.show {
+    display: block;
+}
+
+.success {
+    background: #e6f6f2;
+    color: #056b5a;
+}
+
+.error {
+    background: #fff0ed;
+    color: #a23826;
+}
+
+.member-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+.member {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid #e5dfd3;
+    border-radius: 17px;
+    background: #fffdf8;
+}
+
+.avatar {
+    width: 58px;
+    height: 58px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(135deg,#078b75,#dfb42c);
+    display: grid;
+    place-items: center;
+    color: white;
+    font-weight: 900;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info {
+    min-width: 0;
+    flex: 1;
+}
+
+.info strong {
+    display: block;
+    font-size: .95rem;
+}
+
+.info span {
+    display: block;
+    color: #078b75;
+    font-size: .7rem;
+    font-weight: 800;
+}
+
+.info p {
+    color: #707070;
+    font-size: .76rem;
+    margin-top: 3px;
+}
+
+.delete {
+    flex-shrink: 0;
+    border: 1px solid #ead1cb;
+    background: white;
+    color: #a23826;
+    border-radius: 10px;
+    padding: 8px 10px;
+    font-size: .7rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.empty {
+    text-align: center;
+    padding: 30px 15px;
+    color: #707070;
+    border: 1px dashed #d2c8b7;
+    border-radius: 17px;
+    font-size: .84rem;
+}
+
+@media(max-width:750px) {
+
+    header {
+        padding: 0 15px;
+    }
+
+    .brand span {
+        display: none;
+    }
+
+    main {
+        padding-top: 35px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .panel {
+        padding: 22px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<a href="index.html" class="brand">
+
+    <div class="brand-logo">
+
+        <img
+            src="images/logo.png"
+            alt="Ümmetin Işıkları"
+        >
+
+    </div>
+
+    <span>
+        ÜMMETİN IŞIKLARI
+    </span>
+
+</a>
+
+
+<a
+    href="index.html"
+    class="back"
+>
+    ← Back to website
+</a>
+
+</header>
+
+
+<main>
+
+
+<div class="title">
+
+    <small>
+        ADMINISTRATION
+    </small>
+
+    <h1>
+        Control Center
+    </h1>
+
+    <p>
+        Manage the people of Ümmetin Işıkları.
+    </p>
+
+</div>
+
+
+<!-- ==================================================
+     GROUP MEMBER
+================================================== -->
+
+<div class="grid">
+
+
+<section class="panel">
+
+<h2>
+    Add Group Member
+</h2>
+
+<p class="panel-description">
+    Add a member to a specific organisation group.
+</p>
+
+
+<div
+    id="status"
+    class="status"
+></div>
+
+
+<form id="groupForm">
+
+
+<div class="field">
+
+<label>
+    Group
+</label>
+
+<select
+    id="group"
+    required
+>
+
+<option value="">
+    Select a group
+</option>
+
+<option value="yardimlasma">
+    🤝 Yardımlaşma
+</option>
+
+<option value="din">
+    ☪️ Din
+</option>
+
+<option value="kultur">
+    🕌 Kültür
+</option>
+
+<option value="spor">
+    ⚽ Spor
+</option>
+
+<option value="it">
+    🖥️ İT
+</option>
+
+<option value="finans">
+    📊 Finans
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Name
+</label>
+
+<input
+    id="groupName"
+    type="text"
+    placeholder="e.g. Ronaldo Bhai"
+    required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Position / Job Title
+</label>
+
+<input
+    id="groupRole"
+    type="text"
+    placeholder="e.g. Captain"
+    required
+>
+
+</div>
+
+
+<div class="field">
+
+<label>
+    Duties
+</label>
+
+<textarea
+    id="groupDuties"
+    placeholder="What does this person do?"
+></textarea>
+
+</div>
+
+
+<!-- PHOTO UPLOAD -->
+
+<div class="field">
+
+<label>
+    Profile Photo
+</label>
+
+<div class="photo-box">
+
+<div
+    id="groupPreview"
+    class="preview"
+>
+    Photo
+</div>
+
+<input
+    id="groupPhoto"
+    type="file"
+    accept="image/*"
+>
+
+</div>
+
+</div>
+
+
+<button
+    id="groupSave"
+    class="save"
+    type="submit"
+>
+    + Add Group Member
+</button>
+
+
+</form>
+
+</section>
+
+
+<!-- ==================================================
+     CURRENT GROUP MEMBERS
+================================================== -->
+
+<section class="panel">
+
+<h2>
+    Current Group Members
+</h2>
+
+<p class="panel-description">
+    Select a group to see its members.
+</p>
+
+
+<select id="viewGroup">
+
+<option value="">
+    Select a group to view
+</option>
+
+<option value="yardimlasma">
+    🤝 Yardımlaşma
+</option>
+
+<option value="din">
+    ☪️ Din
+</option>
+
+<option value="kultur">
+    🕌 Kültür
+</option>
+
+<option value="spor">
+    ⚽ Spor
+</option>
+
+<option value="it">
+    🖥️ İT
+</option>
+
+<option value="finans">
+    📊 Finans
+</option>
+
+</select>
+
+
+<div
+    id="groupMembers"
+    class="member-list"
+>
+
+<div class="empty">
+    Select a group to see its members.
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<!-- ==================================================
+     MANAGEMENT
+================================================== -->
+
+<section
+    class="panel"
+    style="margin-top:25px;"
+>
+
+<h2>
+    Management Profiles
+</h2>
+
+<p class="panel-description">
+    Members currently added to the management section.
+</p>
+
+
+<div
+    id="managementMembers"
+    class="member-list"
+>
+
+<div class="empty">
+    Loading profiles...
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<script type="module">
+
+import {
+    createClient
+}
+from
+"https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
+
+
+/* ==================================================
+   SUPABASE
+================================================== */
+
+const SUPABASE_URL =
+    "https://dufqdjvjszewhhakjibb.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_zdE8Z15zobFjWJ0P86B5Qg_55sAbHer";
+
+
+const supabase =
+    createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+/* ==================================================
+   ELEMENTS
+================================================== */
+
+const statusBox =
+    document.getElementById(
+        "status"
+    );
+
+const groupForm =
+    document.getElementById(
+        "groupForm"
+    );
+
+const group =
+    document.getElementById(
+        "group"
+    );
+
+const groupName =
+    document.getElementById(
+        "groupName"
+    );
+
+const groupRole =
+    document.getElementById(
+        "groupRole"
+    );
+
+const groupDuties =
+    document.getElementById(
+        "groupDuties"
+    );
+
+const groupPhoto =
+    document.getElementById(
+        "groupPhoto"
+    );
+
+const groupPreview =
+    document.getElementById(
+        "groupPreview"
+    );
+
+const groupSave =
+    document.getElementById(
+        "groupSave"
+    );
+
+const viewGroup =
+    document.getElementById(
+        "viewGroup"
+    );
+
+const groupMembers =
+    document.getElementById(
+        "groupMembers"
+    );
+
+const managementMembers =
+    document.getElementById(
+        "managementMembers"
+    );
+
+
+let selectedPhoto = null;
+
+
+/* ==================================================
+   HELPERS
+================================================== */
+
+function escapeHTML(value) {
+
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+function showStatus(
+    message,
+    type = "success"
+) {
+
+    statusBox.textContent =
+        message;
+
+    statusBox.className =
+        "status show " +
+        type;
+
+}
+
+
+/* ==================================================
+   PHOTO PREVIEW
+================================================== */
+
+groupPhoto.addEventListener(
+    "change",
+    () => {
+
+        const file =
+            groupPhoto.files[0];
+
+
+        if (!file) {
+
+            selectedPhoto = null;
+
+            groupPreview.textContent =
+                "Photo";
+
+            return;
+
+        }
+
+
+        selectedPhoto =
+            file;
+
+
+        const reader =
+            new FileReader();
+
+
+        reader.onload =
+            event => {
+
+                groupPreview.innerHTML = `
+
+                    <img
+                        src="${event.target.result}"
+                        alt="Preview"
+                    >
+
+                `;
+
+            };
+
+
+        reader.readAsDataURL(file);
+
+    }
+);
+
+
+/* ==================================================
+   LOAD MANAGEMENT
+================================================== */
+
+async function loadManagement() {
+
+    managementMembers.innerHTML = `
+        <div class="empty">
+            Loading profiles...
+        </div>
+    `;
+
+    try {
+
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/management?select=*&order=created_at.desc`,
+            {
+                method: "GET",
+                headers: {
+                    "apikey": SUPABASE_KEY,
+                    "Authorization": `Bearer ${SUPABASE_KEY}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        const responseText = await response.text();
+
+        if (!response.ok) {
+
+            console.error(
+                "MANAGEMENT HTTP ERROR:",
+                response.status,
+                responseText
+            );
+
+            let message = responseText;
+
+            try {
+                const parsed = JSON.parse(responseText);
+                message =
+                    parsed.message ||
+                    parsed.error_description ||
+                    parsed.error ||
+                    parsed.hint ||
+                    responseText;
+            } catch (_) {}
+
+            throw new Error(
+                message || `HTTP ${response.status}`
+            );
+        }
+
+        let data;
+
+        try {
+            data = JSON.parse(responseText);
+        } catch (_) {
+            throw new Error(
+                "Supabase returned invalid JSON."
+            );
+        }
+
+        if (!Array.isArray(data)) {
+            throw new Error(
+                "Unexpected Management response."
+            );
+        }
+
+        if (data.length === 0) {
+
+            managementMembers.innerHTML = `
+                <div class="empty">
+                    No management profiles yet.
+                </div>
+            `;
+
+            return;
+        }
+
+        managementMembers.innerHTML = data.map(member => `
+
+            <article class="member">
+
+                <div class="avatar">
+                    ${
+                        member.photo_url
+                        ? `
+                            <img
+                                src="${escapeHTML(member.photo_url)}"
+                                alt="${escapeHTML(member.name)}"
+                            >
+                        `
+                        : "👤"
+                    }
+                </div>
+
+                <div class="info">
+
+                    <strong>
+                        ${escapeHTML(member.name)}
+                    </strong>
+
+                    <span>
+                        ${escapeHTML(member.role)}
+                    </span>
+
+                    <p>
+                        ID:
+                        ${escapeHTML(member.id)}
+                        <br>
+                        ${escapeHTML(member.description || "")}
+                    </p>
+
+                </div>
+
+                <button
+                    class="delete"
+                    data-id="${escapeHTML(member.id)}"
+                    data-type="management"
+                >
+                    Delete
+                </button>
+
+            </article>
+
+        `).join("");
+
+        managementMembers
+            .querySelectorAll('[data-type="management"]')
+            .forEach(button => {
+
+                button.addEventListener(
+                    "click",
+                    () => deleteManagement(
+                        button.dataset.id
+                    )
+                );
+
+            });
+
+    } catch (error) {
+
+        console.error(
+            "MANAGEMENT ERROR:",
+            error
+        );
+
+        managementMembers.innerHTML = `
+            <div class="empty">
+                <strong>
+                    Management could not be loaded
+                </strong>
+                <br><br>
+                ${escapeHTML(
+                    error.message ||
+                    String(error)
+                )}
+            </div>
+        `;
+    }
+}
+
+
+/* ==================================================
+   LOAD GROUP MEMBERS
+================================================== */
+
+async function loadGroupMembers(
+    groupId
+) {
+
+    if (!groupId) {
+
+        groupMembers.innerHTML = `
+
+            <div class="empty">
+                Select a group to see its members.
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    groupMembers.innerHTML = `
+
+        <div class="empty">
+            Loading group members...
+        </div>
+
+    `;
+
+
+    try {
+
+        const result =
+            await supabase
+                .from("group_members")
+                .select("*")
+                .eq(
+                    "group_id",
+                    groupId
+                )
+                .order(
+                    "created_at",
+                    {
+                        ascending: false
+                    }
+                );
+
+
+        if (result.error) {
+
+            throw result.error;
+
+        }
+
+
+        const data =
+            result.data || [];
+
+
+        if (data.length === 0) {
+
+            groupMembers.innerHTML = `
+
+                <div class="empty">
+                    No members in this group yet.
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        groupMembers.innerHTML =
+            data.map(
+                member => `
+
+<article class="member">
+
+    <div class="avatar">
+
+        ${
+            member.photo_url
+
+            ?
+
+            `<img
+                src="${escapeHTML(
+                    member.photo_url
+                )}"
+                alt="${escapeHTML(
+                    member.name
+                )}"
+            >`
+
+            :
+
+            "👤"
+        }
+
+    </div>
+
+
+    <div class="info">
+
+        <strong>
+            ${escapeHTML(
+                member.name
+            )}
+        </strong>
+
+        <span>
+            ${escapeHTML(
+                member.role
+            )}
+        </span>
+
+        <p>
+
+            ID:
+            ${escapeHTML(
+                member.id
+            )}
+
+            <br>
+
+            ${escapeHTML(
+                member.duties || ""
+            )}
+
+        </p>
+
+    </div>
+
+
+    <button
+        class="delete"
+        data-id="${escapeHTML(
+            member.id
+        )}"
+    >
+        Delete
+    </button>
+
+</article>
+
+                `
+            )
+            .join("");
+
+
+        groupMembers
+            .querySelectorAll(".delete")
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            deleteGroupMember(
+                                button.dataset.id,
+                                groupId
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "GROUP MEMBERS ERROR:",
+            error
+        );
+
+
+        groupMembers.innerHTML = `
+
+            <div class="empty">
+
+                <strong>
+                    Group members could not be loaded.
+                </strong>
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message ||
+                    String(error)
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ==================================================
+   GROUP SELECT
+================================================== */
+
+viewGroup.addEventListener(
+    "change",
+    () => {
+
+        loadGroupMembers(
+            viewGroup.value
+        );
+
+    }
+);
+
+
+/* ==================================================
+   ADD GROUP MEMBER
+================================================== */
+
+groupForm.addEventListener(
+    "submit",
+    async event => {
+
+        event.preventDefault();
+
+
+        groupSave.disabled =
+            true;
+
+        groupSave.textContent =
+            "Saving...";
+
+
+        try {
+
+            const groupId =
+                group.value;
+
+            const name =
+                groupName.value.trim();
+
+            const role =
+                groupRole.value.trim();
+
+            const duties =
+                groupDuties.value.trim();
+
+
+            let photoURL =
+                null;
+
+
+            /* UPLOAD PHOTO */
+
+            if (selectedPhoto) {
+
+                showStatus(
+                    "Uploading photo..."
+                );
+
+
+                const extension =
+                    selectedPhoto.name
+                        .split(".")
+                        .pop()
+                        .toLowerCase();
+
+
+                const fileName =
+                    crypto.randomUUID() +
+                    "." +
+                    extension;
+
+
+                const upload =
+                    await supabase
+                        .storage
+                        .from(
+                            "management-photos"
+                        )
+                        .upload(
+                            fileName,
+                            selectedPhoto,
+                            {
+                                cacheControl:
+                                    "3600",
+
+                                upsert:
+                                    false
+                            }
+                        );
+
+
+                if (upload.error) {
+
+                    throw upload.error;
+
+                }
+
+
+                photoURL =
+                    supabase
+                        .storage
+                        .from(
+                            "management-photos"
+                        )
+  
