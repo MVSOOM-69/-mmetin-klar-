@@ -1062,31 +1062,26 @@ async function loadManagement() {
 
     try {
 
-        const result =
-            await supabase
-                .from(
-                    "management"
-                )
-                .select("*")
-                .order(
-                    "created_at",
-                    {
-                        ascending:
-                            false
-                    }
-                );
-
-
-        if (result.error) {
-
-            throw result.error;
-
+        const response = await fetch(
+    `${SUPABASE_URL}/rest/v1/management?select=*&order=created_at.desc`,
+    {
+        method: "GET",
+        headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization": `Bearer ${SUPABASE_KEY}`,
+            "Content-Type": "application/json"
         }
+    }
+);
 
+if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(
+        errorText || `HTTP ${response.status}`
+    );
+}
 
-        const data =
-            result.data ||
-            [];
+const data = await response.json();
 
 
         if (
